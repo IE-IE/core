@@ -1,0 +1,8 @@
+require 'pp'
+require './helpers.rb'
+require './progressbar.rb'
+require './Block.rb'
+require './Chitin/Chitin.rb'
+require './Chitin/Header.rb'
+require './Chitin/Biff.rb'
+require './Chitin/Resource.rb'

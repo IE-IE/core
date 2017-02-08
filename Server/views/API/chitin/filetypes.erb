@@ -1,0 +1,9 @@
+{
+    <% @result[:filetypes].each do |type, count| %>
+    "<%= type %>": {
+        "name": "<%= type %>",
+        "count": <%= count %>,
+        "files": []
+    }<%= ',' if type != @result[:filetypes].keys.last %>
+    <% end %>
+}

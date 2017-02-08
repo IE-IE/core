@@ -1,0 +1,6 @@
+{
+    "files": [
+        <% @result[:files].each do |file| %>"<%= file %>"<%= ',' unless file == @result[:files].last %>
+        <% end %>
+    ]
+}
