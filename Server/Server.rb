@@ -17,9 +17,7 @@ class Server < WEBrick::HTTPServlet::AbstractServlet
     instance = create_instance( route, request.query )
     instance.send( route.get_method )
 
-    response.body = render( route, instance )
-    response.status = 200
-    response['Content-Type'] = 'application/json'
+    respond( route, instance, response )
   end
 
   def create_instance( route, params )
@@ -44,6 +42,12 @@ class Server < WEBrick::HTTPServlet::AbstractServlet
     view = File.read( view )
     template = ERB.new( view )
     result = template.result( instance_binding )
+  end
+
+  def respond( route, instance, response )
+    response.body = render( route, instance )
+    response.status = 200
+    response['Content-Type'] = 'application/json'
   end
 
   def self.root
