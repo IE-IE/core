@@ -1,9 +1,0 @@
-{
-    <% @filetypes.each do |type, count| %>
-    "<%= type %>": {
-        "name": "<%= type %>",
-        "count": <%= count %>,
-        "files": <%= @files[type] %>
-    }<%= ',' if type != @filetypes.keys.last %>
-    <% end %>
-}
