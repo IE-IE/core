@@ -1,7 +1,0 @@
-require 'pp'
-require './helpers.rb'
-require './Block.rb'
-require './Item/Item.rb'
-require './Item/Header.rb'
-require './Item/ExtendedHeader.rb'
-require './Item/Feature.rb'
