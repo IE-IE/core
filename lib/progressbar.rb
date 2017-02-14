@@ -1,10 +1,8 @@
 class Progressbar
-  attr_reader :i
-  
-  def initialize( max, options = { details: false, display: true } )
-    @max = max.to_f
+  def initialize( iterations, options = { details: false, display: true } )
+    @iterations = iterations.to_f
     @actual = 0
-    @n = 100
+    @human = [0, 100]
     @options = options
 
     show 
@@ -14,7 +12,7 @@ class Progressbar
     if @options[:display]
       print "\r"
 
-      number_of_points = (20 * @i / 100.0).ceil
+      number_of_points = (20 * @percents / 100.0).ceil
 
       print "["
       number_of_points.times do
@@ -27,23 +25,23 @@ class Progressbar
 
       print "] "
       print " " * (@n.to_s.length - @i.to_s.length)
-      print "#{@i} / #{@n}%"
-      print " (#{@actual} / #{@max.to_i})" if @options[:details]
+      print "#{@human[0]} / #{@human[1]}%"
+      print " (#{@actual} / #{@iterations.to_i})" if @options[:details]
     end
   end
 
   def tick
     @actual += 1
-    @i = calc
+    @human[0] = calc
     show
 
-    @i
+    @human[0]
   end
 
   private
 
   def calc
-    ((@actual / @max) * 100.0).ceil
+    ((@actual / @iterations) * 100.0).ceil
   end
 end
 
