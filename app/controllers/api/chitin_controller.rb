@@ -5,16 +5,24 @@ class Api::ChitinController < ApplicationController
   def load
     location = @@chitin_location
     if location
-      response.headers['Content-Type'] = 'text/event-stream'
-      sse = SSE.new(response.stream, retry: 300)
-      sent_progress = 0
-      @@chitin = Chitin.new( location ) do |progress|
-        if progress != sent_progress
-          sse.write({ progress: progress })
-          sent_progress = progress
+      if params['progress']
+        begin
+          response.headers['Content-Type'] = 'text/event-stream'
+          sse = SSE.new(response.stream, retry: 300)
+          sent_progress = 0
+          @@chitin = Chitin.new( location ) do |progress|
+            if progress != sent_progress
+              sse.write({ progress: progress })
+              sent_progress = progress
+            end
+          end
+        ensure
+          sse.close
         end
-
-        #sse.close if progress == 100
+      else
+        @@chitin = Chitin.new( location ) { |progress| true }
+        result = { success: !!@@chitin }
+        render json: result
       end
     end
   end
