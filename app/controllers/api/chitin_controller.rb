@@ -35,8 +35,17 @@ class Api::ChitinController < ApplicationController
   end
 
   def full
-    filetypes = @chitin.get_filetypes.sort.to_h
+    filetypes = @chitin.get_filetypes.sort { |x, y| x[:name] <=> y[:name] }
     files = @chitin.get_files.each { |type, files| files.sort! }
     
+    result = {}
+    result[:full] = []
+
+    filetypes.each do |filetype|
+      filetype[:files] = files[ filetype[:name] ]
+      result[:full] << filetype
+    end
+
+    render json: result
   end
 end

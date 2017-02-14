@@ -1064,3 +1064,49 @@ Processing by Api::ChitinController#filetypes as JSON
 Completed 200 OK in 7733ms (Views: 4.3ms | ActiveRecord: 0.0ms)
 
 
+DEPRECATION WARNING: Passing strings or symbols to the middleware builder is deprecated, please change
+them to actual class references.  For example:
+
+  "Rack::Cors" => Rack::Cors
+
+ (called from <top (required)> at /mnt/pliki/IE-IE/core/config/environment.rb:5)
+Started GET "/api/chitin/set?location=/home/mortimer/PlayOnLinux%27s%20virtual%20drives/bgee/drive_c/Program%20Files/Baldur%27s%20Gate%20-%20Enhanced%20Edition/chitin.key" for 127.0.0.1 at 2017-02-14 17:56:58 +0100
+DEPRECATION WARNING: ActiveRecord::Base.raise_in_transactional_callbacks= is deprecated, has no effect and will be removed without replacement. (called from block (3 levels) in <class:Railtie> at /home/mortimer/.rvm/gems/ruby-2.3.0/gems/activerecord-5.0.1/lib/active_record/railtie.rb:113)
+Processing by Api::ChitinController#set as JSON
+  Parameters: {"location"=>"/home/mortimer/PlayOnLinux's virtual drives/bgee/drive_c/Program Files/Baldur's Gate - Enhanced Edition/chitin.key"}
+Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/chitin/files/ITM" for 127.0.0.1 at 2017-02-14 17:57:06 +0100
+Processing by Api::ChitinController#files as JSON
+  Parameters: {"type"=>"ITM"}
+Completed 200 OK in 10800ms (Views: 8.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/chitin/full" for 127.0.0.1 at 2017-02-14 18:01:29 +0100
+Processing by Api::ChitinController#full as JSON
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 0.0ms)
+
+
+  
+NameError (uninitialized class variable @@chitin_location in Api::ChitinController):
+  
+app/controllers/api/chitin_controller.rb:7:in `load'
+DEPRECATION WARNING: Passing strings or symbols to the middleware builder is deprecated, please change
+them to actual class references.  For example:
+
+  "Rack::Cors" => Rack::Cors
+
+ (called from <top (required)> at /mnt/pliki/IE-IE/core/config/environment.rb:5)
+Started GET "/api/chitin/set?location=/home/mortimer/PlayOnLinux%27s%20virtual%20drives/bgee/drive_c/Program%20Files/Baldur%27s%20Gate%20-%20Enhanced%20Edition/chitin.key" for 127.0.0.1 at 2017-02-14 18:02:05 +0100
+DEPRECATION WARNING: ActiveRecord::Base.raise_in_transactional_callbacks= is deprecated, has no effect and will be removed without replacement. (called from block (3 levels) in <class:Railtie> at /home/mortimer/.rvm/gems/ruby-2.3.0/gems/activerecord-5.0.1/lib/active_record/railtie.rb:113)
+Processing by Api::ChitinController#set as JSON
+  Parameters: {"location"=>"/home/mortimer/PlayOnLinux's virtual drives/bgee/drive_c/Program Files/Baldur's Gate - Enhanced Edition/chitin.key"}
+Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/chitin/full" for 127.0.0.1 at 2017-02-14 18:02:10 +0100
+Processing by Api::ChitinController#full as JSON
+Completed 200 OK in 11025ms (Views: 193.9ms | ActiveRecord: 0.0ms)
+
+
