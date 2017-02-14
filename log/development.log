@@ -934,3 +934,133 @@ Processing by Api::ChitinController#files as JSON
 Completed 200 OK in 9ms (Views: 7.6ms | ActiveRecord: 0.0ms)
 
 
+DEPRECATION WARNING: Passing strings or symbols to the middleware builder is deprecated, please change
+them to actual class references.  For example:
+
+  "Rack::Cors" => Rack::Cors
+
+ (called from <top (required)> at /mnt/pliki/IE-IE/core/config/environment.rb:5)
+Started GET "/api/chitin/set?location=/home/mortimer/PlayOnLinux%27s%20virtual%20drives/bgee/drive_c/Program%20Files/Baldur%27s%20Gate%20-%20Enhanced%20Edition/chitin.key" for 127.0.0.1 at 2017-02-14 17:33:22 +0100
+DEPRECATION WARNING: ActiveRecord::Base.raise_in_transactional_callbacks= is deprecated, has no effect and will be removed without replacement. (called from block (3 levels) in <class:Railtie> at /home/mortimer/.rvm/gems/ruby-2.3.0/gems/activerecord-5.0.1/lib/active_record/railtie.rb:113)
+Processing by Api::ChitinController#set as JSON
+  Parameters: {"location"=>"/home/mortimer/PlayOnLinux's virtual drives/bgee/drive_c/Program Files/Baldur's Gate - Enhanced Edition/chitin.key"}
+Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2017-02-14 17:33:23 +0100
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+actionpack (5.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.1) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.1) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.1) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+rack-cors (0.4.1) lib/rack/cors.rb:81:in `call'
+railties (5.0.1) lib/rails/engine.rb:522:in `call'
+puma (3.7.0) lib/puma/configuration.rb:226:in `call'
+puma (3.7.0) lib/puma/server.rb:578:in `handle_request'
+puma (3.7.0) lib/puma/server.rb:415:in `process_client'
+puma (3.7.0) lib/puma/server.rb:275:in `block in run'
+puma (3.7.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/favicon.ico" for 127.0.0.1 at 2017-02-14 17:33:23 +0100
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+actionpack (5.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.1) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.1) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.1) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+rack-cors (0.4.1) lib/rack/cors.rb:81:in `call'
+railties (5.0.1) lib/rails/engine.rb:522:in `call'
+puma (3.7.0) lib/puma/configuration.rb:226:in `call'
+puma (3.7.0) lib/puma/server.rb:578:in `handle_request'
+puma (3.7.0) lib/puma/server.rb:415:in `process_client'
+puma (3.7.0) lib/puma/server.rb:275:in `block in run'
+puma (3.7.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/api/chitin/filetypes" for 127.0.0.1 at 2017-02-14 17:33:38 +0100
+Processing by Api::ChitinController#filetypes as JSON
+Completed 200 OK in 7230ms (Views: 4.5ms | ActiveRecord: 0.0ms)
+
+
+DEPRECATION WARNING: Passing strings or symbols to the middleware builder is deprecated, please change
+them to actual class references.  For example:
+
+  "Rack::Cors" => Rack::Cors
+
+ (called from <top (required)> at /mnt/pliki/IE-IE/core/config/environment.rb:5)
+Started GET "/api/chitin/set?location=/home/mortimer/PlayOnLinux%27s%20virtual%20drives/bgee/drive_c/Program%20Files/Baldur%27s%20Gate%20-%20Enhanced%20Edition/chitin.key" for 127.0.0.1 at 2017-02-14 17:38:28 +0100
+DEPRECATION WARNING: ActiveRecord::Base.raise_in_transactional_callbacks= is deprecated, has no effect and will be removed without replacement. (called from block (3 levels) in <class:Railtie> at /home/mortimer/.rvm/gems/ruby-2.3.0/gems/activerecord-5.0.1/lib/active_record/railtie.rb:113)
+Processing by Api::ChitinController#set as JSON
+  Parameters: {"location"=>"/home/mortimer/PlayOnLinux's virtual drives/bgee/drive_c/Program Files/Baldur's Gate - Enhanced Edition/chitin.key"}
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/chitin/filetypes" for 127.0.0.1 at 2017-02-14 17:38:33 +0100
+Processing by Api::ChitinController#filetypes as JSON
+Completed 500 Internal Server Error in 6908ms (ActiveRecord: 0.0ms)
+
+
+  
+TypeError (no implicit conversion of Symbol into Integer):
+  
+lib/Chitin/Chitin.rb:109:in `[]'
+lib/Chitin/Chitin.rb:109:in `block in get_filetypes'
+lib/Chitin/Chitin.rb:107:in `each'
+lib/Chitin/Chitin.rb:107:in `get_filetypes'
+app/controllers/api/chitin_controller.rb:27:in `filetypes'
+DEPRECATION WARNING: Passing strings or symbols to the middleware builder is deprecated, please change
+them to actual class references.  For example:
+
+  "Rack::Cors" => Rack::Cors
+
+ (called from <top (required)> at /mnt/pliki/IE-IE/core/config/environment.rb:5)
+Started GET "/api/chitin/set?location=/home/mortimer/PlayOnLinux%27s%20virtual%20drives/bgee/drive_c/Program%20Files/Baldur%27s%20Gate%20-%20Enhanced%20Edition/chitin.key" for 127.0.0.1 at 2017-02-14 17:40:08 +0100
+DEPRECATION WARNING: ActiveRecord::Base.raise_in_transactional_callbacks= is deprecated, has no effect and will be removed without replacement. (called from block (3 levels) in <class:Railtie> at /home/mortimer/.rvm/gems/ruby-2.3.0/gems/activerecord-5.0.1/lib/active_record/railtie.rb:113)
+Processing by Api::ChitinController#set as JSON
+  Parameters: {"location"=>"/home/mortimer/PlayOnLinux's virtual drives/bgee/drive_c/Program Files/Baldur's Gate - Enhanced Edition/chitin.key"}
+Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/chitin/filetypes" for 127.0.0.1 at 2017-02-14 17:40:13 +0100
+Processing by Api::ChitinController#filetypes as JSON
+Completed 200 OK in 7658ms (Views: 5.7ms | ActiveRecord: 0.0ms)
+
+
+DEPRECATION WARNING: Passing strings or symbols to the middleware builder is deprecated, please change
+them to actual class references.  For example:
+
+  "Rack::Cors" => Rack::Cors
+
+ (called from <top (required)> at /mnt/pliki/IE-IE/core/config/environment.rb:5)
+Started GET "/api/chitin/set?location=/home/mortimer/PlayOnLinux%27s%20virtual%20drives/bgee/drive_c/Program%20Files/Baldur%27s%20Gate%20-%20Enhanced%20Edition/chitin.key" for 127.0.0.1 at 2017-02-14 17:46:46 +0100
+DEPRECATION WARNING: ActiveRecord::Base.raise_in_transactional_callbacks= is deprecated, has no effect and will be removed without replacement. (called from block (3 levels) in <class:Railtie> at /home/mortimer/.rvm/gems/ruby-2.3.0/gems/activerecord-5.0.1/lib/active_record/railtie.rb:113)
+Processing by Api::ChitinController#set as JSON
+  Parameters: {"location"=>"/home/mortimer/PlayOnLinux's virtual drives/bgee/drive_c/Program Files/Baldur's Gate - Enhanced Edition/chitin.key"}
+Completed 200 OK in 2ms (Views: 1.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/chitin/filetypes" for 127.0.0.1 at 2017-02-14 17:46:51 +0100
+Processing by Api::ChitinController#filetypes as JSON
+Completed 200 OK in 7733ms (Views: 4.3ms | ActiveRecord: 0.0ms)
+
+

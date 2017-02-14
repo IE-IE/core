@@ -101,16 +101,20 @@ class Chitin
 
   def get_filetypes
     puts "==============================="
-    puts "Chitin.get_count in progress..."
-    unless @@cache[:count]
-      count = Hash.new(0)
-      @resources.each { |resource| count[resource[:type]] += 1 }
+    puts "Chitin.get_filetypes in progress..."
+    unless @@cache[:filetypes]
+      filetypes = Hash.new()
 
-      @@cache[:count] = count
+      @resources.each do |resource|
+        filetypes[resource[:type]] ||= { name: resource[:type], count: 0 }
+        filetypes[resource[:type]][:count] += 1
+      end
+
+      @@cache[:filetypes] = filetypes.values
     end
-    puts "Chitin.get_count finished."
+    puts "Chitin.get_filetypes finished."
 
-    @@cache[:count]
+    @@cache[:filetypes]
   end
 
   def get_files
