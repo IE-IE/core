@@ -58,11 +58,11 @@ class Chitin
   end
 
   def recreate_header
-    print "- recreating header..."
+    puts "- recreating header..."
 
     header = Chitin::Header.new( @bytes, 0 )
 
-    puts "--- finished."
+    puts " finished."
 
     header
   end
@@ -79,7 +79,7 @@ class Chitin
       yield @progressbar.tick
     end
 
-    puts "--- finished."
+    puts " finished."
 
     bifs
   end
@@ -96,7 +96,7 @@ class Chitin
       yield @progressbar.tick
     end
 
-    puts "--- finished."
+    print " finished."
 
     resources
   end
@@ -116,6 +116,7 @@ class Chitin
       @@cache[:filetypes] = filetypes.values
     end
     puts "Chitin.get_filetypes finished."
+    puts "==============================="
 
     @@cache[:filetypes]
   end
@@ -130,6 +131,7 @@ class Chitin
       @@cache[:files] = files
     end
     puts "Chitin.get_files finished."
+    puts "==============================="
 
     @@cache[:files]
   end

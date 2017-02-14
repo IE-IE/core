@@ -11,7 +11,7 @@ class Progressbar
   end
 
   def show
-    if @option[:display]
+    if @options[:display]
       print "\r"
 
       number_of_points = (20 * @i / 100.0).ceil
