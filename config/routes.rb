@@ -4,5 +4,6 @@ Rails.application.routes.draw do
     get '/chitin/files/:type', to: 'chitin#files'
     get '/chitin/full', to: 'chitin#full'
     get '/chitin/set', to: 'chitin#set'
+    get '/chitin/load', to: 'chitin#load'
   end
 end

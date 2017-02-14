@@ -39,7 +39,7 @@ class Chitin
       @location = location
       @header = recreate_header
       @bifs = recreate_bifs
-      @resources = recreate_resources
+      @resources = recreate_resources { |progress| yield progress }
 
       @@cache = {}
       @@cache[:location] = @location
@@ -91,6 +91,7 @@ class Chitin
       resources << Chitin::Resource.new( @bytes, offset )
       offset = resources.last.end
       progressbar.tick
+      yield progressbar.i
     end
 
     puts "\n--- finished."
