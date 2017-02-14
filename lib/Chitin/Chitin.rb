@@ -26,6 +26,7 @@ class Chitin
       @header = @@cache[:header]
       @bifs = @@cache[:bifs]
       @resources = @@cache[:resources]
+      yield 100 # as progress for loading chitin
     else
       File.open( location, 'rb' ) do |f| 
         f.each_byte do |b|
