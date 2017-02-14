@@ -39,7 +39,11 @@ class Chitin
 
       @location = location
       @header = recreate_header
-      @bifs = recreate_bifs
+
+      progressbar_iterations = @header[:number_of_resource] + @header[:number_of_bif]
+      @progressbar = Progressbar.new( progressbar_iterations, display: false )
+
+      @bifs = recreate_bifs { |progress| yield progress }
       @resources = recreate_resources { |progress| yield progress }
 
       @@cache = {}
@@ -58,7 +62,7 @@ class Chitin
 
     header = Chitin::Header.new( @bytes, 0 )
 
-    puts " finished."
+    puts "--- finished."
 
     header
   end
@@ -67,16 +71,15 @@ class Chitin
     bifs = []
 
     puts "- recreating bifs..."
-    progressbar = Progressbar.new( @header[:number_of_bif], details: true )
 
     offset = @header[:bif_offset]
     @header[:number_of_bif].times do
       bifs << Chitin::Biff.new( @bytes, offset )
       offset = bifs.last.end
-      progressbar.tick
+      yield @progressbar.tick
     end
 
-    puts "\n--- finished."
+    puts "--- finished."
 
     bifs
   end
@@ -85,17 +88,15 @@ class Chitin
     resources = []
 
     puts "- recreating resources..."
-    progressbar = Progressbar.new( @header[:number_of_resource], details: true )
 
     offset = @header[:resource_offset]
     @header[:number_of_resource].times do
       resources << Chitin::Resource.new( @bytes, offset )
       offset = resources.last.end
-      progressbar.tick
-      yield progressbar.i
+      yield @progressbar.tick
     end
 
-    puts "\n--- finished."
+    puts "--- finished."
 
     resources
   end
