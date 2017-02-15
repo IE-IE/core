@@ -12,49 +12,70 @@ class Chitin
   }
 
   def initialize( location )
-    @bytes = []
-    @cache = {}
-
     puts "\n"
     puts "==============================="
     puts "Analyzing chitin file..."
 
     if( @@cache[:location] == location )
       puts "Using cache"
-
-      @location = @@cache[:location]
-      @header = @@cache[:header]
-      @bifs = @@cache[:bifs]
-      @resources = @@cache[:resources]
+      use_cache
       yield 100 # as progress for loading chitin
     else
-      File.open( location, 'rb' ) do |f| 
-        f.each_byte do |b|
-          b = b.to_i.to_s(16)
-          # make sure every block has two chars
-          b = '0' + b if b.length == 1
-          @bytes << b
-        end 
-      end
-
-      @location = location
-      @header = recreate_header
-
-      progressbar_iterations = @header[:number_of_resource] + @header[:number_of_bif]
-      @progressbar = Progressbar.new( progressbar_iterations, display: false )
-
-      @bifs = recreate_bifs { |progress| yield progress }
-      @resources = recreate_resources { |progress| yield progress }
-
-      @@cache = {}
-      @@cache[:location] = @location
-      @@cache[:header] = @header
-      @@cache[:bifs] = @bifs
-      @@cache[:resources] = @resources
+      analyze( location ) { |progress| yield progress }
+      save_cache
     end
 
     puts "Analyzing chitin file finished."
     puts "==============================="
+  end
+
+  def get_filetypes
+    puts "==============================="
+    puts "Chitin.get_filetypes in progress..."
+    unless @@cache[:filetypes]
+      filetypes = Hash.new()
+
+      @resources.each do |resource|
+        filetypes[resource[:type]] ||= { name: resource[:type], count: 0 }
+        filetypes[resource[:type]][:count] += 1
+      end
+
+      @@cache[:filetypes] = filetypes.values
+    end
+    puts "Chitin.get_filetypes finished."
+    puts "==============================="
+
+    @@cache[:filetypes]
+  end
+
+  def get_files
+    puts "==============================="
+    puts "Chitin.get_files in progress..."
+    unless @@cache[:files]
+      files = Hash.new([])
+      @resources.each { |resource| files[resource[:type]] += [resource[:name]] }
+
+      @@cache[:files] = files
+    end
+    puts "Chitin.get_files finished."
+    puts "==============================="
+
+    @@cache[:files]
+  end
+
+  private
+
+  def analyze( location )
+    @bytes = File.get_bytes( location )
+
+    @location = location
+    @header = recreate_header
+
+    progressbar_iterations = @header[:number_of_resource] + @header[:number_of_bif]
+    @progressbar = Progressbar.new( progressbar_iterations, display: false )
+
+    @bifs = recreate_bifs { |progress| yield progress }
+    @resources = recreate_resources { |progress| yield progress }
   end
 
   def recreate_header
@@ -101,38 +122,18 @@ class Chitin
     resources
   end
 
-
-  def get_filetypes
-    puts "==============================="
-    puts "Chitin.get_filetypes in progress..."
-    unless @@cache[:filetypes]
-      filetypes = Hash.new()
-
-      @resources.each do |resource|
-        filetypes[resource[:type]] ||= { name: resource[:type], count: 0 }
-        filetypes[resource[:type]][:count] += 1
-      end
-
-      @@cache[:filetypes] = filetypes.values
-    end
-    puts "Chitin.get_filetypes finished."
-    puts "==============================="
-
-    @@cache[:filetypes]
+  def use_cache
+    @location = @@cache[:location]
+    @header = @@cache[:header]
+    @bifs = @@cache[:bifs]
+    @resources = @@cache[:resources]
   end
 
-  def get_files
-    puts "==============================="
-    puts "Chitin.get_files in progress..."
-    unless @@cache[:files]
-      files = Hash.new([])
-      @resources.each { |resource| files[resource[:type]] += [resource[:name]] }
-
-      @@cache[:files] = files
-    end
-    puts "Chitin.get_files finished."
-    puts "==============================="
-
-    @@cache[:files]
+  def save_cache
+    @@cache = {}
+    @@cache[:location] = @location
+    @@cache[:header] = @header
+    @@cache[:bifs] = @bifs
+    @@cache[:resources] = @resources
   end
 end

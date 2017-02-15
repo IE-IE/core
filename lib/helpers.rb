@@ -25,3 +25,19 @@ class Array
     end
   end
 end
+
+class File
+  def self.get_bytes( location )
+    bytes = []
+    self.open( location, 'rb' ) do |f| 
+      f.each_byte do |b|
+        b = b.to_i.to_s(16)
+        # make sure every block has two chars
+        b = '0' + b if b.length == 1
+        bytes << b
+      end 
+    end
+
+    bytes
+  end
+end
