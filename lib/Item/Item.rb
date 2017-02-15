@@ -3,17 +3,8 @@ class Item
               :extended_headers
 
   def initialize( params = {} )
-    @bytes = []
-
     if( params[:location] )
-      File.open( params[:location], 'rb' ) do |f| 
-        f.each_byte do |b|
-          b = b.to_i.to_s(16)
-          # make sure every block has two chars     
-          b = '0' + b if b.length == 1
-          @bytes << b
-        end 
-      end
+      @bytes = File.get_bytes( params[:location] )
     elsif( params[:bytes] )
       @bytes = params[:bytes]
     end
