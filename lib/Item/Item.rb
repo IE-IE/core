@@ -3,11 +3,12 @@ class Item
               :extended_headers
 
   def initialize( params = {} )
-    if( params[:location] )
-      @bytes = File.get_bytes( params[:location] )
-    elsif( params[:bytes] )
-      @bytes = params[:bytes]
-    end
+    @bytes =
+      if( params[:location] )
+        File.get_bytes( params[:location] )
+      elsif( params[:bytes] )
+        params[:bytes]
+      end
 
     if( @bytes )
       @extended_headers = recreate_extended_headers
@@ -25,8 +26,9 @@ class Item
     count = @header[:extended_header_count]
 
     count.times do |i|
-      extended_headers << Item::ExtendedHeader.new( @bytes, offset, @header )
-      offset = extended_headers.last.end
+      extended_header = Item::ExtendedHeader.new( @bytes, offset, @header )
+      extended_headers << extended_header
+      offset = extended_header.end
     end
 
     extended_headers

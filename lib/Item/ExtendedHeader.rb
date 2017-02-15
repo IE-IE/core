@@ -37,12 +37,14 @@ class Item::ExtendedHeader < Block
     recreate_feature_blocks( source, header )
   end
 
+  private
+
   def recreate_feature_blocks( source, header )
     offset = header.values[:feature_blocks].last.end
-    feature_block_count = @values[:feature_block_count]
+    count = @values[:feature_block_count]
     @values[:feature_blocks] = []
 
-    feature_block_count.times do
+    count.times do
       feature_block = Item::Feature.new( source, offset )
       @values[:feature_blocks] << feature_block
       offset = feature_block.end

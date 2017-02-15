@@ -16,6 +16,8 @@ class Chitin::Biff < Block
     recreate_filename( source )
   end
 
+  private
+
   def recreate_filename( source )
     @filename = source[ @values[:filename_offset], @values[:filename_length] ].convert_to( 'word' )
   end

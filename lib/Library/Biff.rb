@@ -8,10 +8,16 @@ class Library::Biff < Library
     puts "\n"
     puts "==============================="
     puts "Analyzing #{filename}..."
-    @header = recreate_header
-    @files = recreate_files
+    analyze
     puts "Analyzing #{filename} finished."
     puts "==============================="
+  end
+
+  private
+
+  def analyze
+    @header = recreate_header
+    @files = recreate_files
   end
 
   def recreate_header
@@ -33,7 +39,7 @@ class Library::Biff < Library
     number = @header[:number_of_file]
     source = get_bytes( @header[:file_offset], file_entry_size * number )
 
-    puts "- recreating files..."
+    print "- recreating files..."
     progressbar = Progressbar.new( number, details: true )
 
     offset = 0
@@ -43,7 +49,7 @@ class Library::Biff < Library
       progressbar.tick
     end
 
-    puts "\n--- finished."
+    puts " finished."
 
     files
   end

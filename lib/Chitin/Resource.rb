@@ -47,6 +47,8 @@ class Chitin::Resource < Block
     convert_type
   end
 
+  private
+  
   def convert_type
     @values[:type] = @@type_pattern[ @values[:type].join ]
   end

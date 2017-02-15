@@ -17,7 +17,7 @@ class Chitin
     puts "Analyzing chitin file..."
 
     if( @@cache[:location] == location )
-      puts "Using cache"
+      puts "Using cache."
       use_cache
       yield 100 # as progress for loading chitin
     else
@@ -51,7 +51,9 @@ class Chitin
   def get_files
     puts "==============================="
     puts "Chitin.get_files in progress..."
-    unless @@cache[:files]
+    if @@cache[:files]
+      puts "Using cache."
+    else
       files = Hash.new([])
       @resources.each { |resource| files[resource[:type]] += [resource[:name]] }
 
@@ -66,7 +68,7 @@ class Chitin
   private
 
   def analyze( location )
-    @bytes = File.get_bytes( location )
+    bytes = File.get_bytes( location )
 
     @location = location
     @header = recreate_header
@@ -79,7 +81,7 @@ class Chitin
   end
 
   def recreate_header
-    puts "- recreating header..."
+    print "- recreating header..."
 
     header = Chitin::Header.new( @bytes, 0 )
 
@@ -91,12 +93,13 @@ class Chitin
   def recreate_bifs
     bifs = []
 
-    puts "- recreating bifs..."
+    print "- recreating bifs..."
 
     offset = @header[:bif_offset]
     @header[:number_of_bif].times do
-      bifs << Chitin::Biff.new( @bytes, offset )
-      offset = bifs.last.end
+      bif = Chitin::Biff.new( @bytes, offset )
+      bifs << bif
+      offset = bif.end
       yield @progressbar.tick
     end
 
@@ -108,16 +111,17 @@ class Chitin
   def recreate_resources
     resources = []
 
-    puts "- recreating resources..."
+    print "- recreating resources..."
 
     offset = @header[:resource_offset]
     @header[:number_of_resource].times do
-      resources << Chitin::Resource.new( @bytes, offset )
-      offset = resources.last.end
+      resource = Chitin::Resource.new( @bytes, offset )
+      resources << resource
+      offset = resource.end
       yield @progressbar.tick
     end
 
-    print " finished."
+    puts " finished."
 
     resources
   end

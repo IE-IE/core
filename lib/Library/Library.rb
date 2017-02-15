@@ -1,6 +1,6 @@
 class Library
-  attr_reader :filename
-  :file
+  attr_reader :filename,
+              :file
 
   def initialize( filename )
     @filename = filename
@@ -9,6 +9,7 @@ class Library
 
   def get_bytes( offset, number )
     bytes = []
+    
     @file.seek( offset, :SET )
     @file.readpartial( number ).each_byte do |b|
       b = b.to_i.to_s(16)

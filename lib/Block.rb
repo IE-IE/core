@@ -8,8 +8,6 @@ class Block
     @end = nil
     @values = {}
     recreate( source, pattern )
-
-    self
   end
 
   def recreate( source, pattern )
