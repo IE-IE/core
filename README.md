@@ -1,18 +1,20 @@
-# Infinity Engine Incredible Editor (IEIE) Core
+# Infinity Engine Incredible Editor Core
 
 Application is under heavy development. It is not usable yet.
 
 ## About
 
-IEIE is a solution to create and edit files for Infinity Engine (IE).
+**IEIE Core** is a solution to create and edit files for Infinity Engine (IE).
 For now there is only one reasonable application to do that: Near Infinity. 
-I decided to create my own tool.
+I decided to create my own tool, which - in example - is more flexible to use with other applications (see **IEIE Interface**).
 
-IEIE is based on gibberlings3 informations about file formats: [check it out](http://gibberlings3.net/iesdp/file_formats/index.htm), with my adjustments (some offsets/sizes just don't match expected results).
+**IEIE Core** is based on gibberlings3 informations about file formats: [check it out](http://gibberlings3.net/iesdp/file_formats/index.htm).
 
 ## How it works?
 
-IEIE Core works as webserver. It communicates over API (requests are made over GET), and responds with JSON answers.
+IEIE Core works as webserver. It communicates over API (requests are made over HTTP), and responds with JSON answers.
+
+It may be used with **IEIE Interface** application, however is not limited to. The only requirement is proper API.
 
 ## Requirements
 
