@@ -1,11 +1,17 @@
 class String
-  # hex to char
+  # Converts any String written as set of hex bytes to ASCII word.
+  # @return [String] ASCII word.
   def to_char
     [self].pack('H*')
   end
 end
 
 class Array
+  # Converts set of bytes to desired type.
+  #
+  # @param type (see Block#initialize)
+  # @return value depending on desired type.
+  # @note Since this method is used mostly in Block, see {Block#initialize}
   def convert_to( type )
     case type
     when 'word'
@@ -27,6 +33,10 @@ class Array
 end
 
 class File
+  # Gets bytes from file
+  #
+  # @param location [String] path to file.
+  # @return [Array<String>] array of strings, whereas each string is bytes written in hexadecimal system.
   def self.get_bytes( location )
     bytes = []
     self.open( location, 'rb' ) do |f| 

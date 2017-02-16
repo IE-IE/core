@@ -9,8 +9,8 @@ class Block
   # @param start [Integer] offset (index of byte in source array) where the first
   #   item of pattern will be matched / start of block.
   # @param pattern [Hash] key: name of field to save; value: [size, type]
-  #   size [String] - hex Integer (written as String), describes how many bytes belong to that field
-  #   type [String] - if provided, the conversion of field's value will be done. Available types:
+  #   - size [String] - hex Integer (written as String), describes how many bytes belong to that field
+  #   - type [String] - if provided, the conversion of field's value will be done. Available types:
   #     - "word" - set of bytes will be converted to ASCII word.
   #     - "boolean array" - each hex byte will be converted to binary byte, and saved as additional array of 8 strings,
   #       whereas each of strings will contain exactly one bit.
