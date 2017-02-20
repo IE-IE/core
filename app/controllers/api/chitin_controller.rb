@@ -43,7 +43,7 @@ class Api::ChitinController < ApplicationController
 
   def filetypes
     result = {}
-    result[:filetypes] = @@chitin.get_filetypes.sort { |x, y| x[:name] <=> y[:name] }
+    result[:filetypes] = @@chitin.get_filetypes
     render json: result
   end
 
@@ -54,7 +54,7 @@ class Api::ChitinController < ApplicationController
   end
 
   def full
-    filetypes = @@chitin.get_filetypes.sort { |x, y| x[:name] <=> y[:name] }
+    filetypes = @@chitin.get_filetypes
     files = @@chitin.get_files.each { |type, files| files.sort! }
     
     result = {}

@@ -21,8 +21,13 @@ class Chitin
       use_cache
       yield 100 # as progress for loading chitin
     else
-      analyze( location ) { |progress| yield progress }
-      save_cache
+      if File.exist? location
+        analyze( location ) { |progress| yield progress }
+        save_cache
+      else
+        puts "File doesn't exist"
+        return false
+      end
     end
 
     puts "Analyzing chitin file finished."
@@ -40,7 +45,7 @@ class Chitin
         filetypes[resource[:type]][:count] += 1
       end
 
-      @@cache[:filetypes] = filetypes.values
+      @@cache[:filetypes] = filetypes.values.sort { |x, y| x[:name] <=> y[:name] }
     end
     puts "Chitin.get_filetypes finished."
     puts "==============================="
@@ -71,33 +76,33 @@ class Chitin
     bytes = File.get_bytes( location )
 
     @location = location
-    @header = recreate_header
+    @header = recreate_header( bytes )
 
     progressbar_iterations = @header[:number_of_resource] + @header[:number_of_bif]
     @progressbar = Progressbar.new( progressbar_iterations, display: false )
 
-    @bifs = recreate_bifs { |progress| yield progress }
-    @resources = recreate_resources { |progress| yield progress }
+    @bifs = recreate_bifs( bytes ) { |progress| yield progress }
+    @resources = recreate_resources( bytes ) { |progress| yield progress }
   end
 
-  def recreate_header
+  def recreate_header( bytes )
     print "- recreating header..."
 
-    header = Chitin::Header.new( @bytes, 0 )
+    header = Chitin::Header.new( bytes, 0 )
 
     puts " finished."
 
     header
   end
 
-  def recreate_bifs
+  def recreate_bifs( bytes )
     bifs = []
 
     print "- recreating bifs..."
 
     offset = @header[:bif_offset]
     @header[:number_of_bif].times do
-      bif = Chitin::Biff.new( @bytes, offset )
+      bif = Chitin::Biff.new( bytes, offset )
       bifs << bif
       offset = bif.end
       yield @progressbar.tick
@@ -108,14 +113,14 @@ class Chitin
     bifs
   end
 
-  def recreate_resources
+  def recreate_resources( bytes )
     resources = []
 
     print "- recreating resources..."
 
     offset = @header[:resource_offset]
     @header[:number_of_resource].times do
-      resource = Chitin::Resource.new( @bytes, offset )
+      resource = Chitin::Resource.new( bytes, offset )
       resources << resource
       offset = resource.end
       yield @progressbar.tick

@@ -37,7 +37,8 @@ class Chitin::Resource < Block
     '0208' => 'INI',
     '0a04' => 'TTF',
     '0504' => 'GLSL',
-    '0804' => 'MENU'
+    '0804' => 'MENU',
+    '0200' => 'MVE'
   }
 
   def initialize( source, start )
@@ -50,6 +51,11 @@ class Chitin::Resource < Block
   private
   
   def convert_type
-    @values[:type] = @@type_pattern[ @values[:type].join ]
+    type = @values[:type].join
+    if @@type_pattern[ type ]
+      @values[:type] = @@type_pattern[ type ]
+    else
+      @values[:type] = type
+    end
   end
 end
