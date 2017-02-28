@@ -16,7 +16,7 @@ class Array
     case type
     when 'word'
       self.delete_if { |byte| byte == '00' }.join.to_char
-    when 'boolean array'
+    when 'array'
       self.map do |byte|
         boolean_string = byte.to_i(16).to_s(2)
         # fill to correct number of digits (8 digits for sure)

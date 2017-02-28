@@ -1,15 +1,8 @@
 class Chitin::Biff < Block
   attr_reader :filename
 
-  @@pattern = {
-    length: ['04', 'number'],
-    filename_offset: ['04', 'number'],
-    filename_length: ['02', 'number'],
-    location: ['02', 'boolean array']
-  }
-
   def initialize( source, start )
-    super( source, start, @@pattern )
+    super( source, start, TABLES['chitin']['bif'] )
 
     @values[:location].flatten!
 

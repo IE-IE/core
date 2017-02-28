@@ -1,12 +1,6 @@
 class Chitin::Resource < Block
-  @@pattern = {
-    name: ['08', 'word'],
-    type: ['02'],
-    locator: ['04', 'boolean array']
-  }
-
   def initialize( source, start )
-    super( source, start, @@pattern )
+    super( source, start, TABLES['chitin']['resource'] )
 
     @values[:locator].flatten!
     convert_type
