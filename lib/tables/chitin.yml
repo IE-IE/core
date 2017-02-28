@@ -1,0 +1,57 @@
+---
+chitin:
+  header:
+    - name: signature
+      offset: '0000'
+      size: 4
+      type: word
+    - name: version
+      offset: '0004'
+      size: 4
+      type: word
+    - name: bif_count
+      offset: '0008'
+      size: 4
+      type: number
+    - name: resource_count
+      offset: '000c'
+      size: 4
+      type: number
+    - name: bif_offset
+      offset: '0010'
+      size: 4
+      type: number
+    - name: resource_offset
+      offset: '0014'
+      size: 4
+      type: number
+  resource:
+    - name: name
+      offset: '0000'
+      size: 8
+      type: word
+    - name: type
+      offset: '0008'
+      size: 2
+      type:
+    - name: locator
+      offset: '000a'
+      size: 4
+      type: array
+  bif:
+    - name: length
+      offset: '0000'
+      size: 4
+      type: number
+    - name: filename_offset
+      offset: '0004'
+      size: 4
+      type: number
+    - name: filename_length
+      offset: 8
+      size: 2
+      type: number
+    - name: location
+      offset: '000a'
+      size: 2
+      type: array
