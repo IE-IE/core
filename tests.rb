@@ -1,9 +1,10 @@
-require './progressbar.rb'
-require './library.rb'
-require './chitin.rb'
-require './item.rb'
+require './lib/progressbar.rb'
+require './lib/library.rb'
+require './lib/chitin.rb'
+require './lib/item.rb'
+require './lib/tables.rb'
 
-bg_location = "/home/mortimer/PlayOnLinux's virtual drives/bgee/drive_c/Program Files/Baldur's Gate - Enhanced Edition/"
+bg_location = "/home/mortimer/PlayOnLinux's virtual drives/bgee/drive_c/Program Files/Baldur's Gate/"
 
 # retrieve sample stuff from biff file basing on chitin
 # chitin_path = bg_location + 'chitin.key'
@@ -17,13 +18,13 @@ bg_location = "/home/mortimer/PlayOnLinux's virtual drives/bgee/drive_c/Program 
 # found_files = files.reject { |file| file[:resource][0, 14].join.to_i(2) != resource_id }
 # pp found_files
 
-# retrieve simple item from biff item file
-# bif_path = bg_location + 'data/ITEMS.BIF'
-# bif = Library::Biff.new( bif_path )
-# file = bif.files[25]
-# file_content = bif.get_bytes( file[:offset], file[:size] )
-# item = Item.new( bytes: file_content )
-# pp item
+#retrieve simple item from biff item file
+bif_path = bg_location + 'Data/Items.bif'
+bif = Library::Biff.new( bif_path )
+file = bif.files[25]
+file_content = bif.get_bytes( file[:offset], file[:size] )
+item = Item.new( bytes: file_content )
+pp item
 
 # retrieve types and filenames from resources (example of BOW)
 # chitin_path = bg_location + 'chitin.key'

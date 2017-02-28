@@ -11,8 +11,8 @@ class Item
       end
 
     if( @bytes )
-      @extended_headers = recreate_extended_headers
       @header = recreate_header
+      @extended_headers = recreate_extended_headers
     end
   end
 

@@ -1,0 +1,333 @@
+---
+item:
+  header:
+    - name: signature
+      offset: '0000'
+      size: 4
+      type: word
+    - name: revision
+      offset: '0004'
+      size: 4
+      type: word
+    - name: name_unidentified
+      offset: '0008'
+      size: 4
+      type: 
+    - name: name_identified
+      offset: '000c'
+      size: 4
+      type:
+    - name: replacement_item
+      offset: '0010'
+      size: 8
+      type: 
+    - name: flags
+      offset: '0018'
+      size: 4
+      type: array
+    - name: type
+      offset: '001c'
+      size: 2
+      type: 
+    - name: usability
+      offset: '001e'
+      size: 4
+      type: array
+    - name: animation
+      offset: '0022'
+      size: 2
+      type: 
+    - name: min_level
+      offset: '0024'
+      size: 2
+      type: number
+    - name: min_strength
+      offset: '0026'
+      size: 2
+      type: number
+    - name: min_strength_bonus
+      offset: '0028'
+      size: 1
+      type: number
+    - name: usability_kit_1
+      offset: '0029'
+      size: 1
+      type: array
+    - name: min_intelligence
+      offset: '002a'
+      size: 1
+      type: number
+    - name: usability_kit_2
+      offset: '002b'
+      size: 1
+      type: array
+    - name: min_dexterity
+      offset: '002c'
+      size: 1
+      type: number
+    - name: usability_kit_3
+      offset: '002d'
+      size: 1
+      type: array
+    - name: min_wisdom
+      offset: '002e'
+      size: 1
+      type: number
+    - name: usability_kit_4
+      offset: '002f'
+      size: 1
+      type: array
+    - name: min_consitution
+      offset: '0030'
+      size: 1
+      type: number
+    - name: weapon_proficiency
+      offset: '0031'
+      size: 1
+      type:
+    - name: min_charisma
+      offset: '0032'
+      size: 2
+      type: number
+    - name: price
+      offset: '0034'
+      size: 4
+      type: number
+    - name: stack
+      offset: '0038'
+      size: 2
+      type: number
+    - name: icon_inventory
+      offset: '003a'
+      size: 8
+      type: 
+    - name: lore
+      offset: '0042'
+      size: 2
+      type: number
+    - name: icon_ground
+      offset: '0044'
+      size: 8
+      type: 
+    - name: weight
+      offset: '004c'
+      size: 4
+      type: number
+    - name: description_unidentified
+      offset: '0050'
+      size: 4
+      type: 
+    - name: description_identified
+      offset: '0054'
+      size: 4
+      type: 
+    - name: icon_description
+      offset: '0058'
+      size: 8
+      type: 
+    - name: enchantment
+      offset: '0060'
+      size: 4
+      type: number
+    - name: extended_header_offset
+      offset: '0064'
+      size: 4
+      type: number
+    - name: extended_header_count
+      offset: '0068'
+      size: 2
+      type: number
+    - name: feature_offset
+      offset: '006a'
+      size: 4
+      type: number
+    - name: feature_equipping_index
+      offset: '006e'
+      size: 2
+      type: number
+    - name: feature_equipping_count
+      offset: '0070'
+      size: 2
+      type: number
+  extended_header:
+    - name: ability
+      offset: '0000'
+      size: 1
+      type: number
+    - name: identify_required
+      offset: '0001'
+      size: 1
+      type: boolean
+    - name: location
+      offset: '0002'
+      size: 1
+      type: number
+    - name: alternative_dice_sides
+      offset: '0003'
+      size: 1
+      type: 
+    - name: icon
+      offset: '0004'
+      size: 8
+      type: 
+    - name: target
+      offset: '000c'
+      size: 1
+      type: number
+    - name: target_count
+      offset: '000d'
+      size: 1
+      type: number
+    - name: range
+      offset: '000e'
+      size: 2
+      type: number
+    - name: projectile_type
+      offset: '0010'
+      size: 1
+      type: number
+    - name: alternative_dice_thrown
+      offset: '0011'
+      size: 1
+      type: 
+    - name: speed
+      offset: '0012'
+      size: 1
+      type: number
+    - name: alternative_damage_bonus
+      offset: '0013'
+      size: 1
+      type: 
+    - name: thac0_bonus
+      offset: '0014'
+      size: 2
+      type: number
+    - name: dice_sides
+      offset: '00016'
+      size: 1
+      type: number
+    - name: primary_type
+      offset: '0017'
+      size: 1
+      type: 
+    - name: dice_thrown
+      offset: '0018'
+      size: 1
+      type: number
+    - name: secondary_type
+      offset: '0019'
+      size: 1
+      type: number
+    - name: damage_bonus
+      offset: '001a'
+      size: 2
+      type: number
+    - name: damage_type
+      offset: '0001c'
+      size: 2
+      type: number
+    - name: feature_count
+      offset: '001e'
+      size: 2
+      type: number
+    - name: feature_offset
+      offset: '0020'
+      size: 2
+      type: number
+    - name: charges
+      offset: '0022'
+      size: 2
+      type: number
+    - name: charge_depletion
+      offset: '0024'
+      size: 2
+      type: number
+    - name: flags
+      offset: '0026'
+      size: 4
+      type: array
+    - name: projectile_animation
+      offset: '002a'
+      size: 2
+      type: 
+    - name: melee_animation
+      offset: '002c'
+      size: 6
+      type: 
+    - name: bow_arrow_qualifier
+      offset: '0032'
+      size: 2
+      type: boolean
+    - name: crossbow_bolt_qualifier
+      offset: '0034'
+      size: 2
+      type: boolean
+    - name: misc_projectile_qualifier
+      offset: '0036'
+      size: 2
+      type: boolean
+  feature:
+    - name: opcode
+      offset: '0000'
+      size: 2
+      type: 
+    - name: target
+      offset: '0002'
+      size: 1
+      type: number
+    - name: power
+      offset: '0003'
+      size: 1
+      type: 
+    - name: param_1
+      offset: '0004'
+      size: 4
+      type: 
+    - name: param_2
+      offset: '0008'
+      size: 4
+      type: 
+    - name: timing_mode
+      offset: '000c'
+      size: 1
+      type: number
+    - name: resistance
+      offset: '000d'
+      size: 1
+      type: 
+    - name: duration
+      offset: '000e'
+      size: 4
+      type: number
+    - name: propability_1
+      offset: '0012'
+      size: 1
+      type: number
+    - name: propability_2
+      offset: '0013'
+      size: 1
+      type: number
+    - name: resource
+      offset: '0014'
+      size: 8
+      type: 
+    - name: dice_thrown
+      offset: '001c'
+      size: 4
+      type: number
+    - name: dice_sides
+      offset: '0020'
+      size: 4
+      type: number
+    - name: saving_throw_type
+      offset: '0024'
+      size: 4
+      type: 
+    - name: saving_throw_bonus
+      offset: '0028'
+      size: 4
+      type: 
+    - name: special
+      offset: '002c'
+      size: 4
+      type: 
