@@ -1,0 +1,65 @@
+---
+biff:
+  header:
+    - name: signature
+      offset: '0000'
+      size: 4
+      type: 'word'
+    - name: version
+      offset: '0004'
+      size: 4
+      type: 'word'
+    - name: file_count
+      offset: '0008'
+      size: 4
+      type: number
+    - name: tileset_count
+      offset: '000c'
+      size: 4
+      type: number
+    - name: file_offset
+      offset: '0010'
+      size: 4
+      type: number
+  file:
+    - name: resource
+      offset: '0000'
+      size: 4
+      type: array
+    - name: offset
+      offset: '0004'
+      size: 4
+      type: number
+    - name: size
+      offset: '0008'
+      size: 4
+      type: number
+    - name: type
+      offset: '000c'
+      size: 2
+      type: number
+    - name: unknown
+      offset: '000e'
+      size: 2
+      type:
+  tileset:
+    - name: resource
+      offset: '0000'
+      size: 4
+      type: array
+    - name: offset
+      offset: '0004'
+      size: 4
+      type: number
+    - name: size
+      offset: '0008'
+      size: 4
+      type: number
+    - name: type
+      offset: '000c'
+      size: 2
+      type: number
+    - name: unknown
+      offset: '000e'
+      size: 2
+      type:

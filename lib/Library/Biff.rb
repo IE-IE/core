@@ -36,7 +36,7 @@ class Library::Biff < Library
     files = []
 
     file_entry_size = 3 * 4 + 2 * 2
-    number = @header[:number_of_file]
+    number = @header[:file_count]
     source = get_bytes( @header[:file_offset], file_entry_size * number )
 
     print "- recreating files..."
