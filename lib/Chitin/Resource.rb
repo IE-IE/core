@@ -16,8 +16,10 @@ class Chitin::Resource < Block
   
   def convert_type
     type = @values[:type].reverse.join
-    if @@type_pattern[ type ]
-      @values[:type] = @@type_pattern[ type ].upcase
+    types = TABLES['resources']['types']
+    selected_type = types.select { |unit| unit['type'] === type }.first
+    if selected_type
+      @values[:type] = selected_type['extension'].upcase
     else
       @values[:type] = type
     end
