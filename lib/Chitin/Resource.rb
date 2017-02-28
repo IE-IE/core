@@ -6,39 +6,42 @@ class Chitin::Resource < Block
   }
 
   @@type_pattern = {
-    '0404' => 'PVRZ',
-    'f203' => 'ARE',
-    'ec03' => 'MOS',
-    'e903' => 'WED',
-    'eb03' => 'TIS',
-    '0100' => 'BMP',
-    'e803' => 'BAM',
-    '0400' => 'WAV',
-    'f403' => '2DA',
-    'f003' => 'IDS',
-    'f503' => 'GAM',
-    'f103' => 'CRE',
-    'f703' => 'WMP',
-    'ed03' => 'ITM',
-    'fb03' => 'VVC',
-    'f803' => 'EFF',
-    'f603' => 'STO',
-    'ef03' => 'BCS',
-    '0204' => 'GUI',
-    '0304' => 'SQL',
-    '0904' => 'LUA',
-    'ea03' => 'CHU',
-    'ee03' => 'SPL',
-    'fd03' => 'PRO',
-    'fa03' => 'CHR',
-    '0004' => 'FNT',
-    'f303' => 'DLG',
-    '0600' => 'PLT',
-    '0208' => 'INI',
-    '0a04' => 'TTF',
-    '0504' => 'GLSL',
-    '0804' => 'MENU',
-    '0200' => 'MVE'
+  	'0001' => 'bmp',
+  	'0002' => 'mve',
+  	'0004' => 'wav',
+  	'0005' => 'wfx',
+  	'0006' => 'plt',
+  	'03e8' => 'bam',
+  	'03e9' => 'wed',
+  	'03ea' => 'chu',
+  	'03eb' => 'tis',
+  	'03ec' => 'mos',
+  	'03ed' => 'itm',
+  	'03ee' => 'spl',
+  	'03ef' => 'bcs',
+  	'03f0' => 'ids',
+  	'03f1' => 'cre',
+  	'03f2' => 'are',
+  	'03f3' => 'dlg',
+  	'03f4' => '2da',
+  	'03f5' => 'gam',
+  	'03f6' => 'sto',
+  	'03f7' => 'wmp',
+  	'03f8' => 'chr',
+  	'03f9' => 'bs',
+  	'03fa' => 'chr',
+  	'03fb' => 'vvc',
+  	'03fc' => 'vef',
+  	'03fd' => 'pro',
+  	'03fe' => 'bio',
+  	'0400' => 'fnt',
+  	'0401' => 'wbm',
+  	'0402' => 'gui',
+  	'0403' => 'sql',
+  	'0404' => 'pvrz',
+  	'044c' => 'ba',
+  	'0802' => 'ini',
+  	'0803' => 'src'
   }
 
   def initialize( source, start )
@@ -51,9 +54,9 @@ class Chitin::Resource < Block
   private
   
   def convert_type
-    type = @values[:type].join
+    type = @values[:type].reverse.join
     if @@type_pattern[ type ]
-      @values[:type] = @@type_pattern[ type ]
+      @values[:type] = @@type_pattern[ type ].upcase
     else
       @values[:type] = type
     end
