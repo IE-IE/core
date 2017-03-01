@@ -21,7 +21,7 @@ class Block
   # @return [Object] Block object.
   def initialize( source, start, pattern )
     @values = {}
-    recreate( source, start, pattern )
+		recreate( source, start, pattern )
   end
 
   # Returns value of some field.
@@ -30,6 +30,31 @@ class Block
   # @return value of field, nil if field doesn't exist.
   def []( name )
     @values[name]
+  end
+
+  # Prepares bytes array to save, based on provided data and pattern.
+  #
+  # @param data [Hash] Data which should be saved, where key is pattern field's name, value should match exactly pattern expected value (see #initialize).
+  # @param pattern (see #initialize)
+  # @return [Array] array of bytes, ready to save.
+  def self.prepare_save( data, pattern )
+  	bytes = []
+  	pattern.each do |field|
+  		# Prepare value
+  		value = data[ field['name'] ]
+  		if value
+  			# value exists, so try to convert it
+  			if field['type']
+  				# convert
+  			end
+  		elsif !value && field['default']
+  			# use default
+  			# WARN: default value is NOT convertable! It is raw data to save. It should be only split to two-chars bytes
+  			value = field['default'].scan(/../) # scan splits string into pairs of chars
+  		else
+  			# don't know what to do, error
+  		end
+  	end
   end
 
   private 
