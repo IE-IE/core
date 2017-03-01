@@ -24,8 +24,9 @@ bif = Library::Biff.new( bif_path )
 file = bif.files[25]
 file_content = bif.get_bytes( file[:offset], file[:size] )
 item = Item.new( bytes: file_content )
-pp item
-
+save = Block.prepare_save( item.header.values, TABLES['item']['header'] )
+print file_content
+print save
 # retrieve types and filenames from resources (example of BOW)
 # chitin_path = bg_location + 'chitin.key'
 # chitin = Chitin.new( chitin_path )

@@ -5,14 +5,18 @@ class String
     [self].pack('H*')
   end
 
-  def to_bytes( size = nil )
+  def to_hex( size = nil )
     bytes = self.unpack('H*').first.scan(/../).map do |byte|
       "0" * (2 - byte.length) + byte
     end
 
-    bytes.unshift('00' * (size - bytes.size)) if size
+    if size
+      (size - bytes.length).times do 
+        bytes.unshift('00')
+      end
+    end
 
-    bytes.join
+    bytes
   end
 end
 
@@ -41,43 +45,53 @@ class Array
     end
   end
 
-  def to_bytes
+  def to_hex( size = nil )
     bytes = []
     self.each do |sequence|
       byte = sequence.join.to_i(2).to_s(16)
       bytes << "0" * (2 - byte.length) + byte
     end
 
-    bytes.join
+    bytes
+  end
+
+  # INFO: Use on result of to_hex!
+  def to_bytes
+    self.map { |byte| byte.to_i(16) }.pack('C*')
   end
 end
 
 class Integer
-  def to_bytes( size = nil )
+  def to_hex( size = nil )
     bytes = self.to_s(16)
     bytes = '0' + bytes if bytes.length % 2 != 0
-
+    
     bytes = bytes.scan(/../)
-    bytes.unshift('00' * (size - bytes.size)) if size
-    bytes.reverse.join
+    if size
+      (size - bytes.size).times do 
+        bytes.unshift('00')
+      end
+    end
+
+    bytes.reverse
   end
 end
 
 class TrueClass
-  def to_bytes( size = nil )
+  def to_hex( size = nil )
     bytes = '10'
     bytes += '00' * (size - 1) if size
 
-    bytes
+    bytes.scan(/../)
   end
 end
 
 class FalseClass
-  def to_bytes( size = nil )
+  def to_hex( size = nil )
     bytes = '00'
     bytes += '00' * (size - 1) if size
 
-    bytes
+    bytes.scan(/../)
   end
 end
 

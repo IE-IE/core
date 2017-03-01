@@ -41,20 +41,30 @@ class Block
     bytes = []
     pattern.each do |field|
       # Prepare value
-      value = data[ field['name'] ]
+      value = data[ field['name'].to_sym ]
       if value
         # value exists, so try to convert it
         if field['type']
-          # convert
+          value = value.to_hex( field['size'] )
         end
       elsif !value && field['default']
         # use default
-        # WARN: default value is NOT convertable! It is raw data to save. It should be only split to two-chars bytes
+        # WARN: default value is NOT convertable! It is raw data to save. It should be only split into pairs of chars (bytes)
+        # It should have proper size
         value = field['default'].scan(/../) # scan splits string into pairs of chars
       else
         # don't know what to do, error
+        return false
+      end
+
+      i = 0
+      value.each do |byte|
+        bytes[ field['offset'] + i ] = byte
+        i += 1
       end
     end
+
+    bytes
   end
 
   private 
