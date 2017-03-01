@@ -67,6 +67,13 @@ class Block
     bytes
   end
 
+  def self.save( bytes, location )
+    bytes.map! { |byte| byte.to_i(16) }
+    File.open( location, 'wb' ) do |output|
+      output.write bytes.pack('C*')
+    end
+  end
+
   private 
 
   # Recreates object from source using pattern.
