@@ -24,8 +24,11 @@ bif = Library::Biff.new( bif_path )
 file = bif.files[25]
 file_content = bif.get_bytes( file[:offset], file[:size] )
 item = Item.new( bytes: file_content )
-save = Block.prepare_save( item.header.values, TABLES['item']['header'] )
-Block.save( save, 'newfile' )
+save = item.header.prepare_save( TABLES['item']['header'] )
+# Block.save( save, 'newfile' )
+
+item = Item.new( location: bg_location + 'Override/MISC73.ITM' )
+item.save('misc73-new.itm')
 
 # retrieve types and filenames from resources (example of BOW)
 # chitin_path = bg_location + 'chitin.key'

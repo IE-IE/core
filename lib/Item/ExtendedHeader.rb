@@ -8,7 +8,7 @@ class Item::ExtendedHeader < Block
   private
 
   def recreate_feature_blocks( source, header )
-    offset = header.values[:feature_blocks].last.end
+    offset = @values[:feature_offset] + header[:feature_offset]
     count = @values[:feature_count]
     @values[:feature_blocks] = []
 

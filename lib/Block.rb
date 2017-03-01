@@ -34,15 +34,15 @@ class Block
 
   # Prepares bytes array to save, based on provided data and pattern.
   #
-  # @param data [Hash] Data which should be saved, where key is pattern field's name, value should match exactly pattern expected value (see #initialize).
   # @param pattern (see #initialize)
   # @return [Array] array of bytes, ready to save.
-  def self.prepare_save( data, pattern )
+  def prepare_save( pattern )
     bytes = []
+
     pattern.each do |field|
       # Prepare value
-      value = data[ field['name'].to_sym ]
-      if value
+      value = @values[ field['name'].to_sym ]
+      if value != nil
         # value exists, so try to convert it
         if field['type']
           value = value.to_hex( field['size'] )
@@ -54,6 +54,7 @@ class Block
         value = field['default'].scan(/../) # scan splits string into pairs of chars
       else
         # don't know what to do, error
+        puts 'Error while preparing field: ' + field['name'] + ', value: ' + value.to_s
         return false
       end
 
@@ -82,6 +83,7 @@ class Block
   # @param (see #initialize)
   # @return [Integer] - integer of offset.
   def recreate( source, start, pattern )
+    @start = start
     pattern.each do |field|
       field['offset'] = field['offset'].to_i(16) if field['offset'].is_a? String
       offset = start + field['offset']
@@ -90,9 +92,9 @@ class Block
       result = source[ offset, field['size'] ]
       result = result.convert_to( type ) if type
 
-      @start = offset
       @end = offset + field['size']
       @values[ field['name'].to_sym ] = result
     end
+
   end
 end
