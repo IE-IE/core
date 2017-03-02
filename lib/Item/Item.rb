@@ -36,23 +36,20 @@ class Item
 
   def save( location )
     bytes = @header.prepare_save( TABLES['item']['header'] )
-    bytes.flatten!
 
     # Casting feature blocks
     feature_blocks_bytes = []
     @header[:feature_blocks].each do |feature_block|
       feature_blocks_bytes += feature_block.prepare_save( TABLES['item']['feature'] )
     end
-    bytes[ @header[:feature_offset] ] = feature_blocks_bytes
-    bytes.flatten!
+    bytes = bytes.append( feature_blocks_bytes, @header[:feature_offset] )
 
     # Extended headers
     extended_headers_bytes = []
     @extended_headers.each do |extended_header|
       extended_headers_bytes += extended_header.prepare_save( TABLES['item']['extended_header'] )
     end
-    bytes[ @header[:extended_header_offset] ] = extended_headers_bytes
-    bytes.flatten!
+    bytes = bytes.append( extended_headers_bytes, @header[:extended_header_offset] )
 
     # Extended headers feature blocks
     @extended_headers.each do |extended_header|
@@ -60,12 +57,8 @@ class Item
       extended_header[:feature_blocks].each do |feature_block|
         feature_blocks_bytes += feature_block.prepare_save( TABLES['item']['feature'])
       end
-      bytes[ @header[:feature_offset] + extended_header[:feature_offset] ] = feature_blocks_bytes
-      bytes.flatten!
+      bytes = bytes.append( feature_blocks_bytes, @header[:feature_offset] + extended_header[:feature_offset] )
     end
-
-    # Remove all nils which came from flattenning
-    bytes = bytes.compact
 
     Block.save( bytes, location )
   end
