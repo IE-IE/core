@@ -59,6 +59,17 @@ class Array
   def to_bytes
     self.map { |byte| byte.to_i(16) }.pack('C*')
   end
+
+  # Appends elements at specified offset
+  def append( array2, offset = self.size )
+  	i = 0
+  	array2.each do |val|
+  		self[ offset + i ] = val
+  		i += 1
+  	end
+
+  	self
+  end
 end
 
 class Integer
