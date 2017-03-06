@@ -1,0 +1,23 @@
+---
+string:
+  header:
+    - name: signature
+      offset: '0000'
+      size: 4
+      type: word
+    - name: version
+      offset: '0004'
+      size: 4
+      type: word
+    - name: language
+      offset: '0008'
+      size: 2
+      type: 
+    - name: entries_count
+      offset: '000a'
+      size: 4
+      type: number
+    - name: string_offset
+      offset: '000e'
+      size: 4
+      type: number

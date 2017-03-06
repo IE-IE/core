@@ -1,8 +1,8 @@
-require './lib/progressbar.rb'
-require './lib/library.rb'
-require './lib/chitin.rb'
-require './lib/item.rb'
-require './lib/tables.rb'
+require '../progressbar.rb'
+require '../library.rb'
+require '../chitin.rb'
+require '../item.rb'
+require '../tables.rb'
 
 bg_location = "/home/mortimer/PlayOnLinux's virtual drives/bgee/drive_c/Program Files/Baldur's Gate/"
 

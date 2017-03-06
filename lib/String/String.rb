@@ -14,6 +14,7 @@ class String
   private
 
   def analyze( location )
-
+    bytes = File.get_bytes( location )
+    @header = String::Header.new( bytes, 0 )
   end
 end

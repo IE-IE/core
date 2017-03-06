@@ -4,11 +4,11 @@ biff:
     - name: signature
       offset: '0000'
       size: 4
-      type: 'word'
+      type: word
     - name: version
       offset: '0004'
       size: 4
-      type: 'word'
+      type: word
     - name: file_count
       offset: '0008'
       size: 4
