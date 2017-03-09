@@ -18,6 +18,28 @@ class String
 
     bytes
   end
+
+  # Encodes string in specified way
+  #
+  # @param params [Hash] Hash of params (use symbols!)
+  #   - :table - encoding table from string.yml
+  #   - :encoding - encoding to use as a final result (default UTF-8)
+  #   - :custom - table for custom chars converting
+  # @return encoded string
+  def custom_encode( params = {} )
+    table = params[:table] || {}
+    encoding = params[:encoding] || table['encoding'] || 'UTF-8'
+    custom = params[:custom] || table['custom'] || {}
+
+    self.chars.map do |char|
+      if custom[ char.ord ]
+        custom[ char.ord ].force_encoding( encoding )
+      else
+        char.force_encoding( encoding )
+      end
+    end.join
+  end
+
 end
 
 class Array

@@ -6,7 +6,6 @@ dialog_location = "/home/mortimer/PlayOnLinux's virtual drives/bgee/drive_c/Prog
 
 string = String.new(dialog_location)
 
-encoding_table = TABLES['string']['encodings']['bg1']['pl']
 10.times do |n|
-  puts string.entries[516 + n][:string].custom_encode( table: encoding_table )
+  puts string.entries[516 + n][:string]
 end

@@ -21,3 +21,53 @@ string:
       offset: '000e'
       size: 4
       type: number
+  entry:
+    - name: specific
+      offset: '0000'
+      size: 2
+      type: number
+    - name: resource
+      offset: '0002'
+      size: 8
+      type: 
+    - name: volume
+      offset: '000a'
+      size: 4
+      type: number
+    - name: pitch
+      offset: '000e'
+      size: 4
+      type: number
+    - name: string_offset
+      offset: '00012'
+      size: 4
+      type: number
+    - name: string_length
+      offset: '00016'
+      size: 4
+      type: number
+  # Encoding is used to convert NOT EXISTING characters to UTF-8 ones
+  # and to determine which encodings should be used by default for languages
+  encodings:
+    bg1:
+      pl:
+        encoding:
+        custom:
+          229: Ą
+          230: Ć
+          231: Ę
+          232: Ł
+          233: Ń
+          234: Ó
+          235: Ś
+          236: Ź
+          237: Ż
+          238: ą
+          239: ć
+          240: ę
+          241: ł
+          242: ń
+          243: ó
+          244: ś
+          245: ź
+          246: ż
