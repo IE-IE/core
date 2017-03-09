@@ -13,6 +13,7 @@ class String::Entry < Block
     if string
       @values[:string] = string.convert_to('word')
         .custom_encode( table: TABLES['string']['encodings']['bg1']['pl'] )
+        .chomp
     end
   end
 end

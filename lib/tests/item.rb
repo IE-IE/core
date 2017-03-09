@@ -9,7 +9,7 @@ bg_location = "/home/mortimer/PlayOnLinux's virtual drives/bgee/drive_c/Program 
 # Retrieve simple item from biff item file
 bif_path = bg_location + 'Data/Items.bif'
 bif = Library::Biff.new( bif_path )
-file = bif.files[25]
+file = bif.files[176]
 file_content = bif.get_bytes( file[:offset], file[:size] )
 item = Item.new( bytes: file_content )
 pp item
