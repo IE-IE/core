@@ -18,18 +18,6 @@ bg_location = "/home/mortimer/PlayOnLinux's virtual drives/bgee/drive_c/Program 
 # found_files = files.reject { |file| file[:resource][0, 14].join.to_i(2) != resource_id }
 # pp found_files
 
-#retrieve simple item from biff item file
-bif_path = bg_location + 'Data/Items.bif'
-bif = Library::Biff.new( bif_path )
-file = bif.files[25]
-file_content = bif.get_bytes( file[:offset], file[:size] )
-item = Item.new( bytes: file_content )
-save = item.header.prepare_save( TABLES['item']['header'] )
-# Block.save( save, 'newfile' )
-
-item = Item.new( location: bg_location + 'Override/MISC73.ITM' )
-item.save('misc73-new.itm')
-
 # retrieve types and filenames from resources (example of BOW)
 # chitin_path = bg_location + 'chitin.key'
 # chitin = Chitin.new( chitin_path )
