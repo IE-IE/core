@@ -1,5 +1,4 @@
 class Api::ChitinController < ApplicationController
-  require './lib/chitin'
   include ActionController::Live
 
   def load
