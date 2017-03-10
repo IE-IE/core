@@ -7,9 +7,9 @@ require_relative './tables'
 require_relative './Block'
 require_relative './Progressbar'
 
-require_relative './String/String'
-require_relative './String/Header'
-require_relative './String/Entry'
+require_relative './Text/Text'
+require_relative './Text/Header'
+require_relative './Text/Entry'
 
 require_relative './Chitin/Chitin'
 require_relative './Chitin/Header'

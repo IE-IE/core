@@ -1,4 +1,4 @@
-class String
+class Text
   attr_reader :header,
               :entries
 
@@ -20,7 +20,7 @@ class String
       @location = location
       @bytes = File.get_bytes( @location )
 
-      @header = String::Header.new( @bytes, 0 )
+      @header = Text::Header.new( @bytes, 0 )
       @entries = recreate_entries
 
       save_cache
@@ -50,7 +50,7 @@ class String
     entry_size = 26
     offset = id * entry_size + starting_offset
 
-    String::Entry.new( @bytes, offset, @header[:string_offset], id )
+    Text::Entry.new( @bytes, offset, @header[:string_offset], id )
   end
 
   def use_cache

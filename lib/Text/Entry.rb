@@ -1,4 +1,4 @@
-class String::Entry < Block
+class Text::Entry < Block
   def initialize( source, start, string_offset, ref )
     super( source, start, TABLES['string']['entry'] )
 

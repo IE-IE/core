@@ -1,4 +1,4 @@
-class String::Header < Block
+class Text::Header < Block
   def initialize( source, start )
     super( source, start, TABLES['string']['header'] )
   end
