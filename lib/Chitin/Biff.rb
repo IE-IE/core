@@ -2,7 +2,7 @@ class Chitin::Biff < Block
   attr_reader :filename
 
   def initialize( source, start )
-    super( source, start, TABLES['chitin']['bif'] )
+    super( source, start, TABLES['chitin']['biff'] )
 
     @values[:location].flatten!
 

@@ -1,6 +1,6 @@
 class Chitin
   attr_reader :header,
-              :bifs,
+              :biffs,
               :resources,
               :location
 
@@ -8,7 +8,7 @@ class Chitin
     location: nil,
     game_location: nil,
     header: nil,
-    bifs: nil,
+    biffs: nil,
     resources: nil,
   }
 
@@ -72,9 +72,9 @@ class Chitin
   end
 
   def biff_of( resource )
-  	index = resource.bif_index
+  	index = resource.biff_index
   	
-  	@bifs[ index ]
+  	@biffs[ index ]
   end
 
   def retrieve_file( resource )
@@ -95,10 +95,10 @@ class Chitin
     @game_location = Pathname.new( @location ).parent.to_s
     @header = recreate_header( bytes )
 
-    progressbar_iterations = @header[:resource_count] + @header[:bif_count]
+    progressbar_iterations = @header[:resource_count] + @header[:biff_count]
     @progressbar = Progressbar.new( progressbar_iterations, display: false )
 
-    @bifs = recreate_bifs( bytes ) { |progress| yield progress }
+    @biffs = recreate_biffs( bytes ) { |progress| yield progress }
     @resources = recreate_resources( bytes ) { |progress| yield progress }
   end
 
@@ -112,22 +112,22 @@ class Chitin
     header
   end
 
-  def recreate_bifs( bytes )
-    bifs = []
+  def recreate_biffs( bytes )
+    biffs = []
 
-    print "- recreating bifs..."
+    print "- recreating biffs..."
 
-    offset = @header[:bif_offset]
-    @header[:bif_count].times do
-      bif = Chitin::Biff.new( bytes, offset )
-      bifs << bif
-      offset = bif.end
+    offset = @header[:biff_offset]
+    @header[:biff_count].times do
+      biff = Chitin::Biff.new( bytes, offset )
+      biffs << biff
+      offset = biff.end
       yield @progressbar.tick
     end
 
     puts " finished."
 
-    bifs
+    biffs
   end
 
   def recreate_resources( bytes )
@@ -152,7 +152,7 @@ class Chitin
     @location = @@cache[:location]
     @game_location = @@cache[:game_location]
     @header = @@cache[:header]
-    @bifs = @@cache[:bifs]
+    @biffs = @@cache[:biffs]
     @resources = @@cache[:resources]
   end
 
@@ -161,7 +161,7 @@ class Chitin
     @@cache[:location] = @location
     @@cache[:game_location] = @game_location
     @@cache[:header] = @header
-    @@cache[:bifs] = @bifs
+    @@cache[:biffs] = @biffs
     @@cache[:resources] = @resources
   end
 end

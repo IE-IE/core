@@ -10,7 +10,7 @@ class Chitin::Resource < Block
     @values[:locator][18, 14].join.to_i(2)
   end
 
-  def bif_index
+  def biff_index
   	@values[:locator][0, 12].join.to_i(2)
   end
 

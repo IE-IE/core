@@ -12,7 +12,7 @@ pp item
 
 # retrieve name of item
 item_name_ref = item.header[:name_identified]
-string = String.new( bg_location + 'Dialog.tlk' )
+string = Text.new( bg_location + 'Dialog.tlk' )
 item_name = string.entries[ item_name_ref ][:string]
 pp item_name
 
