@@ -1,5 +1,6 @@
 require 'pp'
 require 'yaml'
+require 'pathname'
 
 require_relative './helpers'
 require_relative './tables'

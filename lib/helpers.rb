@@ -147,3 +147,17 @@ class File
     bytes
   end
 end
+
+class Dir
+  # Finds file, case insensitive (!)
+  # Return full path (where joined with found file)
+  def self.find_file( where, what )
+    curr_dir = Dir.pwd
+    Dir.chdir(where)
+    what = what.gsub('\\', '/')
+    file = Dir.glob('**/*').find { |f| f.downcase == what.downcase }
+    Dir.chdir(curr_dir)
+
+    File.join(where, file)
+  end
+end

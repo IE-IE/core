@@ -6,6 +6,7 @@ class Chitin
 
   @@cache = {
     location: nil,
+    game_location: nil,
     header: nil,
     bifs: nil,
     resources: nil,
@@ -70,10 +71,19 @@ class Chitin
     @@cache[:files]
   end
 
-  def bif( resource )
+  def biff_of( resource )
   	index = resource.bif_index
   	
   	@bifs[ index ]
+  end
+
+  def retrieve_file( resource )
+    biff_path = biff_of( resource ).filename
+    biff_path = Dir.find_file( @game_location, biff_path )
+    files = Library::Biff.new( biff_path ).files
+    file = files[resource.index]
+
+    file
   end
 
   private
@@ -82,6 +92,7 @@ class Chitin
     bytes = File.get_bytes( location )
 
     @location = location
+    @game_location = Pathname.new( @location ).parent.to_s
     @header = recreate_header( bytes )
 
     progressbar_iterations = @header[:resource_count] + @header[:bif_count]
@@ -139,6 +150,7 @@ class Chitin
 
   def use_cache
     @location = @@cache[:location]
+    @game_location = @@cache[:game_location]
     @header = @@cache[:header]
     @bifs = @@cache[:bifs]
     @resources = @@cache[:resources]
@@ -147,6 +159,7 @@ class Chitin
   def save_cache
     @@cache = {}
     @@cache[:location] = @location
+    @@cache[:game_location] = @game_location
     @@cache[:header] = @header
     @@cache[:bifs] = @bifs
     @@cache[:resources] = @resources

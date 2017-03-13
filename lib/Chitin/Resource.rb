@@ -6,6 +6,10 @@ class Chitin::Resource < Block
     convert_type
   end
 
+  def index
+    @values[:locator][0, 14].join.to_i(2)
+  end
+
   def bif_index
   	@values[:locator][20, 12].join.to_i(2)
   end

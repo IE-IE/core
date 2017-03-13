@@ -40,12 +40,14 @@ class Library::Biff < Library
     source = get_bytes( @header[:file_offset], file_entry_size * number )
 
     print "- recreating files..."
-    progressbar = Progressbar.new( number, details: true )
+    progressbar = Progressbar.new( number, display: false )
 
     offset = 0
     number.times do
-      files << Library::Biff::File.new( source, offset )
-      offset = files.last.end
+      biff = Library::Biff::File.new( source, offset )
+      index = biff[:resource][0, 14].join.to_i(2)
+      files[index] = biff
+      offset = biff.end
       progressbar.tick
     end
 
