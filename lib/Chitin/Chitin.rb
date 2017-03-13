@@ -70,6 +70,12 @@ class Chitin
     @@cache[:files]
   end
 
+  def bif( resource )
+  	index = resource.bif_index
+  	
+  	@bifs[ index ]
+  end
+
   private
 
   def analyze( location )
