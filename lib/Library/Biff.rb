@@ -13,6 +13,11 @@ class Library::Biff < Library
     puts "==============================="
   end
 
+  def get_file( index )
+    file = @files[index]
+    get_bytes( file[:offset], file[:size] )
+  end
+
   private
 
   def analyze
@@ -33,7 +38,7 @@ class Library::Biff < Library
   end
 
   def recreate_files
-    files = []
+    files = {}
 
     file_entry_size = 3 * 4 + 2 * 2
     number = @header[:file_count]
@@ -45,7 +50,7 @@ class Library::Biff < Library
     offset = 0
     number.times do
       biff = Library::Biff::File.new( source, offset )
-      index = biff[:resource][0, 14].join.to_i(2)
+      index = biff[:resource][18, 14].join.to_i(2)
       files[index] = biff
       offset = biff.end
       progressbar.tick

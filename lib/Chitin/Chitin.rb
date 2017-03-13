@@ -79,11 +79,11 @@ class Chitin
 
   def retrieve_file( resource )
     biff_path = biff_of( resource ).filename
-    biff_path = Dir.find_file( @game_location, biff_path )
-    files = Library::Biff.new( biff_path ).files
-    file = files[resource.index]
+    # Need to use separate function, which converts '\' to '/', and is case-insensitive
+    biff_fullpath = Dir.find_file( @game_location, biff_path )
+    biff = Library::Biff.new( biff_fullpath )
 
-    file
+    biff.get_file( resource.index )
   end
 
   private

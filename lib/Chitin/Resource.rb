@@ -2,16 +2,16 @@ class Chitin::Resource < Block
   def initialize( source, start )
     super( source, start, TABLES['chitin']['resource'] )
 
-    @values[:locator].flatten!
+    @values[:locator] = @values[:locator].reverse.flatten
     convert_type
   end
 
   def index
-    @values[:locator][0, 14].join.to_i(2)
+    @values[:locator][18, 14].join.to_i(2)
   end
 
   def bif_index
-  	@values[:locator][20, 12].join.to_i(2)
+  	@values[:locator][0, 12].join.to_i(2)
   end
 
   private

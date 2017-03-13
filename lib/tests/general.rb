@@ -2,18 +2,6 @@ require_relative '../app'
 
 bg_location = "/home/mortimer/PlayOnLinux's virtual drives/bgee/drive_c/Program Files/Baldur's Gate/"
 
-# retrieve sample stuff from biff file basing on chitin
-# chitin_path = bg_location + 'chitin.key'
-# chitin = Chitin.new( chitin_path )
-# some_id = 0
-# resource_index = chitin.resources[some_id][:locator][20, 12].join.to_i(2)
-# chitin_bif = chitin.bifs[ resource_index ]
-# bif_filename = chitin_bif.filename
-# files = Library::Biff.new( bg_location + bif_filename ).files
-# resource_id = chitin.resources[some_id][:locator][0, 14].join.to_i(2)
-# found_files = files.reject { |file| file[:resource][0, 14].join.to_i(2) != resource_id }
-# pp found_files
-
 # retrieve types and filenames from resources (example of BOW)
 # chitin_path = bg_location + 'chitin.key'
 # chitin = Chitin.new( chitin_path )
