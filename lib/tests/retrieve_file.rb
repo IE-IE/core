@@ -6,4 +6,4 @@ chitin_path = bg_location + 'Chitin.key'
 chitin = Chitin.new( chitin_path ) {}
 resource = chitin.resources[5600]
 print resource[:type]
-print chitin.retrieve_file( resource )[0, 4] # get only four bytes to compare type
+print chitin.retrieve_file( resource )[0, 4].convert_to('word') # get only four bytes to compare type
