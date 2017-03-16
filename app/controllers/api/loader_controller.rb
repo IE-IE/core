@@ -4,9 +4,9 @@ class Api::LoaderController < ApplicationController
   def game_location
     game_location = params[:location]
     chitin_location = find_chitin( game_location )
-    dialog_location = find_dialog( game_location )
+    text_location = find_text( game_location )
 
-    unless chitin_location && dialog_location
+    unless chitin_location && text_location
       result = {
         success: false,
         error: "Unable to locate chitin.key or/and dialog.tlk inside specified game directory"
@@ -18,41 +18,45 @@ class Api::LoaderController < ApplicationController
 
       Memory.save( :game_location, game_location )
       Memory.save( :chitin_location, chitin_location )
-      Memory.save( :dialog_location, dialog_location )
+      Memory.save( :text_location, text_location )
     end
 
     render json: result
   end
 
-  def chitin_load
-    location = Memory.read( :chitin_location )
+  def content_load
+    content = params[:content]
+
+    unless ['chitin', 'text'].include? content
+      return false
+    end
+
+    location = Memory.read( content + '_location' )
+    klass = content.capitalize.constantize
+
     if location
       if params['progress']
         begin
           response.headers['Content-Type'] = 'text/event-stream'
           sse = SSE.new( response.stream, retry: 300 )
           sent_progress = 0
-          chitin = Chitin.new( location ) do |progress|
+          content_value = klass.new( location ) do |progress|
             if progress != sent_progress
               sse.write({ progress: progress })
               sent_progress = progress
             end
           end
-          Memory.save( :chitin, chitin )
+          Memory.save( content, content_value )
         ensure
           sse.close
         end
       else
-        chitin = Chitin.new( location ) {}
-        Memory.save( :chitin, chitin )
-        result = { success: !!chitin }
+        content_value = klass.new( location ) {}
+        Memory.save( content, content_value )
+        result = { success: !!content_value }
         render json: result
       end
     end
-  end
-
-  def dialog_load
-
   end
 
   private
@@ -61,7 +65,7 @@ class Api::LoaderController < ApplicationController
     Dir.find_file( game_location, 'chitin.key' )
   end
 
-  def find_dialog( game_location )
+  def find_text( game_location )
     Dir.find_file( game_location, 'dialog.tlk' )
   end
 end
