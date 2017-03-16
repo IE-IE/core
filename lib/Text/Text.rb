@@ -16,12 +16,13 @@ class Text
     if( @@cache[:location] == location )
       puts "Using cache."
       use_cache
+      yield 100 # as progress for loading text
     else
       @location = location
       @bytes = File.get_bytes( @location )
 
       @header = Text::Header.new( @bytes, 0 )
-      @entries = recreate_entries
+      @entries = recreate_entries { |progress| yield progress }
 
       save_cache
     end
@@ -36,8 +37,11 @@ class Text
     print "- recreating entries..."
 
     entries = []
+    @progressbar = Progressbar.new( @header[:entries_count], display: false )
+
     @header[:entries_count].times do |i|
       entries << create_entry(i)
+      yield @progressbar.tick
     end
 
     puts " finished."
