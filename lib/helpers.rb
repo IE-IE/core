@@ -152,12 +152,20 @@ class Dir
   # Finds file, case insensitive (!)
   # Return full path (where joined with found file)
   def self.find_file( where, what )
+    unless Dir.exist? where
+      return false
+    end
+
     curr_dir = Dir.pwd
     Dir.chdir(where)
     what = what.gsub('\\', '/')
     file = Dir.glob('**/*').find { |f| f.downcase == what.downcase }
     Dir.chdir(curr_dir)
 
-    File.join(where, file)
+    if file
+      File.join(where, file)
+    else
+      false
+    end
   end
 end

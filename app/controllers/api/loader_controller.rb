@@ -11,14 +11,14 @@ class Api::LoaderController < ApplicationController
         success: false,
         error: "Unable to locate chitin.key or/and dialog.tlk inside specified game directory"
       }
-
-      Memory.save( :game_location, game_location )
-      Memory.save( :chitin_location, chitin_location )
-      Memory.save( :dialog_location, dialog_location )
     else
       result = {
         success: true
       }
+
+      Memory.save( :game_location, game_location )
+      Memory.save( :chitin_location, chitin_location )
+      Memory.save( :dialog_location, dialog_location )
     end
 
     render json: result
