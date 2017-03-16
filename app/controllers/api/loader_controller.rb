@@ -1,17 +1,24 @@
 class Api::LoaderController < ApplicationController
   include ActionController::Live
 
-   def chitin_location
-    result = {}
-    if File.exist? params[:location]
-      result[:success] = true
-      Memory.save( :chitin_location, params[:location] )
+  def game_location
+    game_location = params[:location]
+    chitin_location = find_chitin( game_location )
+    dialog_location = find_dialog( game_location )
 
-      set_game_location
-      set_dialog_location
+    unless chitin_location && dialog_location
+      result = {
+        success: false,
+        error: "Unable to locate chitin.key or/and dialog.tlk inside specified game directory"
+      }
+
+      Memory.save( :game_location, game_location )
+      Memory.save( :chitin_location, chitin_location )
+      Memory.save( :dialog_location, dialog_location )
     else
-      result[:success] = false
-      result[:error] = "Location doesn't exist"
+      result = {
+        success: true
+      }
     end
 
     render json: result
@@ -44,17 +51,17 @@ class Api::LoaderController < ApplicationController
     end
   end
 
-  private
+  def dialog_load
 
-  def set_game_location
-    chitin_location = Memory.read( :chitin_location )
-    game_location = File.dirname( chitin_location )
-    Memory.save( :game_location, game_location )
   end
 
-  def set_dialog_location
-    game_location = Memory.read( :game_location )
-    dialog_location = Dir.find_file( game_location, 'dialog.tlk' )
-    Memory.save( :dialog_location, dialog_location )
+  private
+
+  def find_chitin( game_location )
+    Dir.find_file( game_location, 'chitin.key' )
+  end
+
+  def find_dialog( game_location )
+    Dir.find_file( game_location, 'dialog.tlk' )
   end
 end
