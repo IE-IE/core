@@ -31,6 +31,10 @@ class Text
     puts "==============================="
   end
 
+  def get_entry( id )
+  	@entries[id]
+  end
+
   private
 
   def recreate_entries
