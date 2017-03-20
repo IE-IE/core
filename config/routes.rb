@@ -9,5 +9,6 @@ Rails.application.routes.draw do
     get '/chitin/files/:type', to: 'chitin#files'
     get '/chitin/full', to: 'chitin#full'
 
+    get '/text/string/:id', to: 'text#string'
   end
 end
