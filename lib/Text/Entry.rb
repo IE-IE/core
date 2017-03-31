@@ -1,6 +1,6 @@
 class Text::Entry < Block
   def initialize( source, start, string_offset, ref )
-    super( source, start, TABLES['string']['entry'] )
+    super( source, start, TABLES['text']['entry'] )
 
     @ref = ref
     recreate_string( source, string_offset )
@@ -12,7 +12,7 @@ class Text::Entry < Block
     string = source[ offset, length ]
     if string
       @values[:string] = string.convert_to('word')
-        .custom_encode( table: TABLES['string']['encodings']['bg1']['pl'] )
+        .custom_encode( table: TABLES['text']['encodings']['bg1']['pl'] )
         .chomp
     end
   end

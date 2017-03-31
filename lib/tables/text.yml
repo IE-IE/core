@@ -1,5 +1,5 @@
 ---
-string:
+text:
   header:
     - name: signature
       offset: '0000'

@@ -1,5 +1,5 @@
 class Text::Header < Block
   def initialize( source, start )
-    super( source, start, TABLES['string']['header'] )
+    super( source, start, TABLES['text']['header'] )
   end
 end
