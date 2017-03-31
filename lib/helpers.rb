@@ -32,11 +32,8 @@ class String
     custom = params[:custom] || table['custom'] || {}
 
     self.chars.map do |char|
-      if custom[ char.ord ]
-        custom[ char.ord ].force_encoding( encoding )
-      else
-        char.force_encoding( encoding )
-      end
+      char = custom[ char.ord ] if custom[ char.ord ]
+      char.force_encoding( encoding )
     end.join
   end
 
