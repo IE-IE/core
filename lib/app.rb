@@ -27,3 +27,8 @@ require_relative './Library/Biff'
 require_relative './Library/Biff/Header'
 require_relative './Library/Biff/Tileset'
 require_relative './Library/Biff/File'
+
+require_relative './Bam/Bam'
+require_relative './Bam/Cycle'
+require_relative './Bam/Frame'
+require_relative './Bam/Header'
