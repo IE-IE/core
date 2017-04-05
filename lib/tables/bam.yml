@@ -1,0 +1,65 @@
+---
+bam:
+  header:
+    - name: signature
+      offset: '0000'
+      size: 4
+      type: word
+    - name: version
+      offset: '0004'
+      size: 4
+      type: word
+    - name: frame_count
+      offset: '0008'
+      size: 2
+      type: number
+    - name: cycle_count
+      offset: '000a'
+      size: 1
+      type: 
+    - name: compressed_color_index
+      offset: '000b'
+      size: 1
+      type: number
+    - name: frame_offset
+      offset: '000c'
+      size: 4
+      type: number
+    - name: pallete_offset
+      offset: '0010'
+      size: 4
+      type: number
+    - name: frame_lookup_table_offset
+      offset: '0014'
+      size: 4
+      type: word
+  frame:
+    - name: width
+      offset: '0000'
+      size: 2
+      type: number
+    - name: height
+      offset: '0002'
+      size: 2
+      type: number
+    - name: center_x
+      offset: '0004'
+      size: 2
+      type: number
+    - name: center_y
+      offset: '0006'
+      size: 2
+      type: number
+    - name: frame_data_offset
+      offset: '0008'
+      size: 4
+      type: array
+  cycle:
+    - name: frame_count
+      offset: '0000'
+      size: 2
+      type: number
+    - name: frame_lookup_table_index
+      offset: '0002'
+      size: 2
+      type: number
