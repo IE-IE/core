@@ -16,7 +16,7 @@ bam:
     - name: cycle_count
       offset: '000a'
       size: 1
-      type: 
+      type: number
     - name: compressed_color_index
       offset: '000b'
       size: 1
@@ -32,7 +32,7 @@ bam:
     - name: frame_lookup_table_offset
       offset: '0014'
       size: 4
-      type: word
+      type: number
   frame:
     - name: width
       offset: '0000'
