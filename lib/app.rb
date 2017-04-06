@@ -2,34 +2,39 @@ require 'pp'
 require 'yaml'
 require 'pathname'
 
-require_relative './helpers'
-require_relative './tables'
 
-require_relative './Block'
-require_relative './Format'
-require_relative './Progressbar'
+requires = [ 
+  'helpers',
+  'tables',
 
-require_relative './Text/Text'
-require_relative './Text/Header'
-require_relative './Text/Entry'
+  'Block',
+  'Format',
+  'Progressbar',
 
-require_relative './Chitin/Chitin'
-require_relative './Chitin/Header'
-require_relative './Chitin/Biff'
-require_relative './Chitin/Resource'
+  'Text/Text',
+  'Text/Header',
+  'Text/Entry',
 
-require_relative './Item/Item'
-require_relative './Item/Header'
-require_relative './Item/ExtendedHeader'
-require_relative './Item/Feature'
+  'Chitin/Chitin',
+  'Chitin/Header',
+  'Chitin/Biff',
+  'Chitin/Resource',
 
-require_relative './Library/Library'
-require_relative './Library/Biff/Biff'
-require_relative './Library/Biff/Header'
-require_relative './Library/Biff/Tileset'
-require_relative './Library/Biff/File'
+  'Item/Item',
+  'Item/Header',
+  'Item/ExtendedHeader',
+  'Item/Feature',
 
-require_relative './Bam/Bam'
-require_relative './Bam/Cycle'
-require_relative './Bam/Frame'
-require_relative './Bam/Header'
+  'Library/Library',
+  'Library/Biff/Biff',
+  'Library/Biff/Header',
+  'Library/Biff/Tileset',
+  'Library/Biff/File',
+
+  'Bam/Bam',
+  'Bam/Cycle',
+  'Bam/Frame',
+  'Bam/Header'
+]
+
+requires.each { |path| require_relative path }
