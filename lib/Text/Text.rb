@@ -21,7 +21,11 @@ class Text < Format
       @location = location
       @bytes = File.get_bytes( @location )
 
-      @header = Text::Header.new( @bytes, 0 )
+      @header = recreate(
+        klass: Text::Header,
+        one: true,
+        bytes: @bytes
+      )
       @entries = recreate_entries { |progress| yield progress }
 
       save_cache
