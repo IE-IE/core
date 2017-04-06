@@ -1,4 +1,4 @@
-class Text
+class Text < Format
   attr_reader :header,
               :entries
 

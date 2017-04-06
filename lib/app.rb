@@ -6,6 +6,7 @@ require_relative './helpers'
 require_relative './tables'
 
 require_relative './Block'
+require_relative './Format'
 require_relative './Progressbar'
 
 require_relative './Text/Text'
@@ -23,7 +24,7 @@ require_relative './Item/ExtendedHeader'
 require_relative './Item/Feature'
 
 require_relative './Library/Library'
-require_relative './Library/Biff'
+require_relative './Library/Biff/Biff'
 require_relative './Library/Biff/Header'
 require_relative './Library/Biff/Tileset'
 require_relative './Library/Biff/File'

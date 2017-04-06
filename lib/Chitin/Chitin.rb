@@ -1,4 +1,4 @@
-class Chitin
+class Chitin < Format
   attr_reader :header,
               :biffs,
               :resources,

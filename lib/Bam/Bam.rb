@@ -1,4 +1,4 @@
-class BAM
+class BAM < Format
   attr_reader :header,
               :pallete,
               :frames,

@@ -1,4 +1,4 @@
-class Item
+class Item < Format
   attr_reader :header,
               :extended_headers
 
