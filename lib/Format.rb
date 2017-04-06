@@ -1,5 +1,8 @@
 class Format
-  def recreate_multiple( params = {} )
+  def recreate( params = {} )
+    params[:count] ||= 1
+    params[:offset] ||= 0
+
     result = []
     offset = params[:offset]
 
@@ -15,6 +18,10 @@ class Format
 
     puts params[:message][:end] if params[:message] && params[:message][:end]
 
-    result
+    if result.count == 1
+      result.first
+    else
+      result
+    end
   end
 end

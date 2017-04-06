@@ -93,13 +93,41 @@ class Chitin < Format
 
     @location = location
     @game_location = Pathname.new( @location ).parent.to_s
-    @header = recreate_header( bytes )
+
+    @header = recreate(
+        klass: Chitin::Header,
+        bytes: bytes,
+        message: {
+          start: '- recreating header...',
+          end: ' finished.'
+        }
+    )
 
     progressbar_iterations = @header[:resource_count] + @header[:biff_count]
     @progressbar = Progressbar.new( progressbar_iterations, display: false )
 
-    @biffs = recreate_biffs( bytes ) { |progress| yield progress }
-    @resources = recreate_resources( bytes ) { |progress| yield progress }
+    @biffs = recreate( 
+        klass: Chitin::Biff, 
+        offset: @header[:biff_offset], 
+        count: @header[:biff_count], 
+        bytes: bytes,
+        progressbar: @progressbar,
+        message: {
+          start: '- recreating biffs...',
+          end: ' finished.'
+        }
+      ) { |progress| yield progress }
+    @resources = recreate( 
+        klass: Chitin::Resource, 
+        offset: @header[:resource_offset], 
+        count: @header[:resource_count], 
+        bytes: bytes,
+        progressbar: @progressbar,
+        message: {
+          start: '- recreating resource...',
+          end: ' finished.'
+        }
+      ) { |progress| yield progress }
   end
 
   def recreate_header( bytes )
@@ -110,42 +138,6 @@ class Chitin < Format
     puts " finished."
 
     header
-  end
-
-  def recreate_biffs( bytes )
-    biffs = []
-
-    print "- recreating biffs..."
-
-    offset = @header[:biff_offset]
-    @header[:biff_count].times do
-      biff = Chitin::Biff.new( bytes, offset )
-      biffs << biff
-      offset = biff.end
-      yield @progressbar.tick
-    end
-
-    puts " finished."
-
-    biffs
-  end
-
-  def recreate_resources( bytes )
-    resources = []
-
-    print "- recreating resources..."
-
-    offset = @header[:resource_offset]
-    @header[:resource_count].times do
-      resource = Chitin::Resource.new( bytes, offset )
-      resources << resource
-      offset = resource.end
-      yield @progressbar.tick
-    end
-
-    puts " finished."
-
-    resources
   end
 
   def use_cache
