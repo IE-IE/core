@@ -15,8 +15,18 @@ class BAM < Format
     if( @bytes )
       @header = BAM::Header.new( @bytes, 0 )
       @pallete = recreate_pallete
-      @frames = recreate_multiple( BAM::Frame, @header[:frame_offset], @header[:frame_count], @bytes )
-      @cycles = recreate_multiple( BAM::Cycle, @frames.last.end, @header[:cycle_count], @bytes )
+      @frames = recreate_multiple( 
+        klass: BAM::Frame, 
+        offset: @header[:frame_offset], 
+        count: @header[:frame_count], 
+        bytes: @bytes
+      )
+      @cycles = recreate_multiple( 
+        klass: BAM::Cycle, 
+        offset: @frames.last.end, 
+        count: @header[:cycle_count], 
+        bytes: @bytes
+      )
     end
   end
 
