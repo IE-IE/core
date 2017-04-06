@@ -1,8 +1,8 @@
 class Item::ExtendedHeader < Block
-  def initialize( source, start, header )
+  def initialize( source, start, params )
     super( source, start, TABLES['item']['extended_header'] )
 
-    recreate_feature_blocks( source, header )
+    recreate_feature_blocks( source, params[:header] )
   end
 
   private

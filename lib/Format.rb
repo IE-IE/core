@@ -9,7 +9,11 @@ class Format
     print params[:message][:start] if params[:message] && params[:message][:start]
 
     params[:count].times do |i|
-      object = params[:klass].new( params[:bytes], offset )
+      object = if params[:params]
+                  params[:klass].new( params[:bytes], offset, params[:params] )
+               else
+                  params[:klass].new( params[:bytes], offset )
+               end
       offset = object.end
       result << object
 

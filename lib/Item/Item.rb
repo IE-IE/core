@@ -11,27 +11,21 @@ class Item < Format
       end
 
     if( @bytes )
-      @header = recreate_header
-      @extended_headers = recreate_extended_headers
+      @header = recreate(
+        klass: Item::Header,
+        one: true,
+        bytes: @bytes
+      )
+      @extended_headers = recreate( 
+        klass: Item::ExtendedHeader, 
+        offset: @header[:extended_header_offset], 
+        count: @header[:extended_header_count], 
+        bytes: @bytes,
+        params: {
+          header: @header
+        }
+      )
     end
-  end
-
-  def recreate_header
-    Item::Header.new( @bytes, 0 )
-  end
-
-  def recreate_extended_headers
-    extended_headers = []
-    offset = @header[:extended_header_offset]
-    count = @header[:extended_header_count]
-
-    count.times do |i|
-      extended_header = Item::ExtendedHeader.new( @bytes, offset, @header )
-      extended_headers << extended_header
-      offset = extended_header.end
-    end
-
-    extended_headers
   end
 
   def save( location )
