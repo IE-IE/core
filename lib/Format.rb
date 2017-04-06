@@ -18,7 +18,7 @@ class Format
 
     puts params[:message][:end] if params[:message] && params[:message][:end]
 
-    if result.count == 1
+    if params[:one]
       result.first
     else
       result

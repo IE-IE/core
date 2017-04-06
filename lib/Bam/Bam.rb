@@ -15,6 +15,7 @@ class BAM < Format
     if( @bytes )
       @header = recreate(
         klass: BAM::Header,
+        one: true,
         bytes: @bytes
       )
       @frames = recreate( 

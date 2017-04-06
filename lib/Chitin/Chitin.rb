@@ -96,6 +96,7 @@ class Chitin < Format
 
     @header = recreate(
         klass: Chitin::Header,
+        one: true,
         bytes: bytes,
         message: {
           start: '- recreating header...',
@@ -128,16 +129,6 @@ class Chitin < Format
           end: ' finished.'
         }
       ) { |progress| yield progress }
-  end
-
-  def recreate_header( bytes )
-    print "- recreating header..."
-
-    header = Chitin::Header.new( bytes, 0 )
-
-    puts " finished."
-
-    header
   end
 
   def use_cache
