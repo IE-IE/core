@@ -58,6 +58,10 @@ class Array
       end
     when 'number'
       self.reverse.join.to_i(16)
+    when 'number_array'
+      self.map do |byte|
+        byte.to_i(16)
+      end
     when 'boolean'
       number = self.reverse.join.to_i(16)
       number == 0 ? false : true

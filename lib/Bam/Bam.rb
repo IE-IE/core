@@ -51,13 +51,14 @@ class BAM < Format
   end
 
   def recreate_frame_table
-    # Find highest frame_index+frame_count to determine length of table
-    length = 0
+    # Find highest frame_index+frame_count to determine size of table
+    size = 0
     @cycles.each do |cycle|
       sum = cycle[:frame_table_index] + cycle[:frame_count]
-      length = sum if sum > length
+      size = sum if sum > size
     end
 
-    
+    bytes = @bytes[ @header[:frame_table_offset], size ]
+    bytes.convert_to 'number_array'
   end
 end
