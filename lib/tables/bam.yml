@@ -45,11 +45,11 @@ bam:
     - name: center_x
       offset: '0004'
       size: 2
-      type: number
+      type: signed
     - name: center_y
       offset: '0006'
       size: 2
-      type: number
+      type: signed
     - name: frame_data
       offset: '0008'
       size: 4

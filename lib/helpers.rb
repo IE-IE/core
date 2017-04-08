@@ -58,6 +58,11 @@ class Array
       end
     when 'number'
       self.reverse.join.to_i(16)
+    when 'signed'
+      sign = self.pop
+      number = self.reverse.join.to_i(16)
+      number = number * (-1) if sign == 'ff'
+      number
     when 'number_array'
       self.map do |byte|
         byte.to_i(16)
