@@ -2,7 +2,8 @@ class BAM < Format
   attr_reader :header,
               :pallete,
               :frames,
-              :cycles
+              :cycles,
+              :frame_table
 
   def initialize( params = {} )
     @bytes =
@@ -31,6 +32,7 @@ class BAM < Format
         bytes: @bytes
       )
       @pallete = recreate_pallete
+      @frame_table = recreate_frame_table
     end
   end
 
@@ -46,5 +48,16 @@ class BAM < Format
     end
 
     pallete
+  end
+
+  def recreate_frame_table
+    # Find highest frame_index+frame_count to determine length of table
+    length = 0
+    @cycles.each do |cycle|
+      sum = cycle[:frame_table_index] + cycle[:frame_count]
+      length = sum if sum > length
+    end
+
+    
   end
 end
