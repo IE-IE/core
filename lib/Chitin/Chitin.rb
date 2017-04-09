@@ -13,12 +13,12 @@ class Chitin < Format
   }
 
   def initialize( location )
-    puts "\n"
-    puts "==============================="
-    puts "Analyzing chitin file..."
+    LOG.info "\n"
+    LOG.info "==============================="
+    LOG.info "Analyzing chitin file..."
 
     if( @@cache[:location] == location )
-      puts "Using cache."
+      LOG.info "Using cache."
       use_cache
       yield 100 # as progress for loading chitin
     else
@@ -26,18 +26,18 @@ class Chitin < Format
         analyze( location ) { |progress| yield progress }
         save_cache
       else
-        puts "File doesn't exist"
+        LOG.info "File doesn't exist"
         return false
       end
     end
 
-    puts "Analyzing chitin file finished."
-    puts "==============================="
+    LOG.info "Analyzing chitin file finished."
+    LOG.info "==============================="
   end
 
   def get_filetypes
-    puts "==============================="
-    puts "Chitin.get_filetypes in progress..."
+    LOG.info "==============================="
+    LOG.info "Chitin.get_filetypes in progress..."
     unless @@cache[:filetypes]
       filetypes = Hash.new()
 
@@ -48,25 +48,25 @@ class Chitin < Format
 
       @@cache[:filetypes] = filetypes.values.sort { |x, y| x[:name] <=> y[:name] }
     end
-    puts "Chitin.get_filetypes finished."
-    puts "==============================="
+    LOG.info "Chitin.get_filetypes finished."
+    LOG.info "==============================="
 
     @@cache[:filetypes]
   end
 
   def get_files
-    puts "==============================="
-    puts "Chitin.get_files in progress..."
+    LOG.info "==============================="
+    LOG.info "Chitin.get_files in progress..."
     if @@cache[:files]
-      puts "Using cache."
+      LOG.info "Using cache."
     else
       files = Hash.new([])
       @resources.each { |resource| files[resource[:type]] += [resource[:name]] }
 
       @@cache[:files] = files
     end
-    puts "Chitin.get_files finished."
-    puts "==============================="
+    LOG.info "Chitin.get_files finished."
+    LOG.info "==============================="
 
     @@cache[:files]
   end
