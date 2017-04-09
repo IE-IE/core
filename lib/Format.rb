@@ -3,7 +3,7 @@ class Format
 
     result = []
 
-    print message[:start] if message && message[:start]
+    LOG.info message[:start] if message && message[:start]
 
     count.times do |i|
       object = if params
@@ -17,7 +17,7 @@ class Format
       yield progressbar.tick if progressbar
     end
 
-    puts message[:end] if message && message[:end]
+    LOG.info message[:end] if message && message[:end]
 
     if one
       result.first
