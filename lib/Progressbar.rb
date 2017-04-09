@@ -1,9 +1,9 @@
 class Progressbar
-  def initialize( iterations, options = { details: false, display: true } )
+  def initialize( iterations, details: false, display: true )
     @iterations = iterations.to_f
     @actual = 0
     @human = [0, 100]
-    @options = options
+    @options = { details: details, display: display }
 
     show 
   end
