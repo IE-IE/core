@@ -159,6 +159,7 @@ class Dir
   # Return full path (where joined with found file)
   def self.find_file( where, what )
     unless Dir.exist? where
+      LOG.error "Dir.find_file: Directory #{where} doesn't exist."
       return false
     end
 
