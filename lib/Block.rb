@@ -54,7 +54,7 @@ class Block
         value = field['default'].scan(/../) # scan splits string into pairs of chars
       else
         # don't know what to do, error
-        puts 'Error while preparing field: ' + field['name'] + ', value: ' + value.to_s
+        LOG.fatal 'Block.prepare_save: Fatal while preparing field: ' + field['name'] + ', value: ' + value.to_s
         return false
       end
 
