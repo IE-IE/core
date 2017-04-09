@@ -36,16 +36,55 @@ class BAM < Format
     end
   end
 
+  # Frame can be id of frame or BAM::Frame
+  def image_of( frame )
+    if frame.is_a? Integer
+      frame = @frames[frame]
+    elsif !frame.is_a? BAM::Frame
+      puts 'Oh, no no. You want the image of what? Seriously!'
+      return
+    end
+
+    png = ChunkyPNG::Image.new( frame[:width], frame[:height], ChunkyPNG::Color::TRANSPARENT )
+    row = 0
+    column = 0
+
+    # Decompress
+    frame.decompress!( @pallete[256] ) if frame.compressed?
+
+    frame.data.each do |index|
+      color = @pallete[index]
+
+      # Apparently we (didn't) hit transparency!
+      if index != @pallete[256]
+        png[column, row] = ChunkyPNG::Color.rgb( color[2].to_i(16), color[1].to_i(16), color[0].to_i(16) )
+      end
+
+      column += 1
+      if column == frame[:width]
+        column = 0
+        row += 1
+      end
+    end
+
+    png.save( 'filename.png' )
+  end
+
   private
 
   def recreate_pallete
     offset = @header[:pallete_offset]
     count = 256
     pallete = []
+    transparency = 0
 
     count.times do |i|
-      pallete << @bytes[ offset + i * 4, 4 ]
+      color = @bytes[ offset + i * 4, 4 ]
+      transparency = i if color == ["00", "ff", "00", "00"]
+      pallete << color
     end
+
+    pallete[256] = transparency
 
     pallete
   end

@@ -9,14 +9,10 @@ resource = chitin.resources.detect { |resource| resource[:name] == 'ISHLD01' }
 bam_bytes = chitin.retrieve_file( resource ) 
 bam = BAM.new( bytes: bam_bytes )
 
-pp bam.header
-pp bam.cycles
-pp bam.frames
+# pp bam.header
+# pp bam.cycles
+# pp bam.frames
 # pp bam.pallete
 # pp bam.frame_table
+bam.image_of(0)
 
-puts "bytes: " + bam_bytes.size.to_s
-bam.frames.each do |frame|
-  print frame[:frame_data][1, 31].join.to_i(2)
-  print "\n"
-end

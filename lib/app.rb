@@ -1,7 +1,7 @@
 require 'pp'
 require 'yaml'
 require 'pathname'
-
+require 'chunky_png'
 
 requires = [ 
   'helpers',
