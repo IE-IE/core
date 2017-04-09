@@ -5,13 +5,15 @@ class BAM < Format
               :cycles,
               :frame_table
 
-  def initialize( params = {} )
-    @bytes =
-      if( params[:location] )
-        File.get_bytes( params[:location] )
-      elsif( params[:bytes] )
-        params[:bytes]
-      end
+  def initialize( location: nil, bytes: nil )
+    if( location )
+      @bytes = File.get_bytes( location )
+    elsif( bytes )
+      @bytes = bytes
+    else
+      puts "BAM.initialize: You need to provide :location or :bytes!"
+      return
+    end
 
     if( @bytes )
       @header = recreate(
@@ -36,12 +38,25 @@ class BAM < Format
     end
   end
 
+  # Generate multiples images
+  def images( frames:, transparent: true )
+    result = []
+
+    frames = @frames if frames == :all
+
+    frames.each do |frame|
+      result << image( frame: frame, transparent: transparent )
+    end
+
+    result
+  end
+
   # Frame can be id of frame or BAM::Frame
-  def image_of( frame:, transparent: true )
+  def image( frame:, transparent: true )
     if frame.is_a? Integer
       frame = @frames[frame]
     elsif !frame.is_a? BAM::Frame
-      puts 'Oh, no no. You want the image of ...what?'
+      puts "BAM.image: frame: '#{frame}' is neither frame index, nor BAM::Frame"
       return
     end
 
@@ -67,7 +82,7 @@ class BAM < Format
       end
     end
 
-    png.save( 'filename.png', interlace: true )
+    png
   end
 
   private
