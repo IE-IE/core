@@ -4,6 +4,9 @@ require 'pathname'
 require 'chunky_png'
 require 'logger'
 
+LOG = Logger.new(STDOUT)
+LOG.level = Logger::WARN
+
 requires = [ 
   'helpers',
   'tables',
@@ -39,6 +42,3 @@ requires = [
 ]
 
 requires.each { |path| require_relative path }
-
-LOG = Logger.new(STDOUT)
-LOG.level = Logger::WARN

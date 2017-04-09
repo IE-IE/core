@@ -9,4 +9,4 @@ end
 
 TABLES.freeze
 
-puts "Tables generated and freezed."
+LOG.info "Tables generated and freezed."
