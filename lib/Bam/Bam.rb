@@ -11,7 +11,7 @@ class BAM < Format
     elsif( bytes )
       @bytes = bytes
     else
-      puts "BAM.initialize: You need to provide :location or :bytes!"
+      LOG.error "BAM.initialize: You need to provide :location or :bytes!"
       return
     end
 
@@ -56,7 +56,7 @@ class BAM < Format
     if frame.is_a? Integer
       frame = @frames[frame]
     elsif !frame.is_a? BAM::Frame
-      puts "BAM.image: frame: '#{frame}' is neither frame index, nor BAM::Frame"
+      LOG.error "BAM.image: frame: '#{frame}' is neither frame index, nor BAM::Frame"
       return
     end
 
