@@ -4,7 +4,7 @@ bg_location = "/home/mortimer/PlayOnLinux's virtual drives/bgee/drive_c/Program 
 chitin_path = bg_location + 'Chitin.key'
 
 chitin = Chitin.new( chitin_path ) {}
-resource = chitin.resources.detect { |resource| resource[:name] == 'ISHLD01' }
+resource = chitin.resources.detect { |resource| resource[:name] == 'ISHLD02' }
 
 bam_bytes = chitin.retrieve_file( resource ) 
 bam = BAM.new( bytes: bam_bytes )
@@ -14,5 +14,6 @@ bam = BAM.new( bytes: bam_bytes )
 # pp bam.frames
 # pp bam.pallete
 # pp bam.frame_table
-bam.image_of(0)
+
+bam.image_of( frame: 1, transparent: true )
 

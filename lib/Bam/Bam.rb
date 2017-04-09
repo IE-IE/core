@@ -37,11 +37,11 @@ class BAM < Format
   end
 
   # Frame can be id of frame or BAM::Frame
-  def image_of( frame )
+  def image_of( frame:, transparent: true )
     if frame.is_a? Integer
       frame = @frames[frame]
     elsif !frame.is_a? BAM::Frame
-      puts 'Oh, no no. You want the image of what? Seriously!'
+      puts 'Oh, no no. You want the image of ...what?'
       return
     end
 
@@ -49,14 +49,14 @@ class BAM < Format
     row = 0
     column = 0
 
-    # Decompress
-    frame.decompress!( @pallete[256] ) if frame.compressed?
+    # Decompress (won't decompress if isn't compressed)
+    frame.decompress!( @pallete[256] )
 
-    frame.data.each do |index|
-      color = @pallete[index]
+    frame.data.each do |val|
+      color = @pallete[val]
 
       # Apparently we (didn't) hit transparency!
-      if index != @pallete[256]
+      if val != @pallete[256] || !transparent
         png[column, row] = ChunkyPNG::Color.rgb( color[2].to_i(16), color[1].to_i(16), color[0].to_i(16) )
       end
 
@@ -67,7 +67,7 @@ class BAM < Format
       end
     end
 
-    png.save( 'filename.png' )
+    png.save( 'filename.png', interlace: true )
   end
 
   private
@@ -80,12 +80,12 @@ class BAM < Format
 
     count.times do |i|
       color = @bytes[ offset + i * 4, 4 ]
-      transparency = i if color == ["00", "ff", "00", "00"]
+      transparency = i if color == ["00", "ff", "00", "00"] && transparency == 0
       pallete << color
     end
 
     pallete[256] = transparency
-
+    
     pallete
   end
 
