@@ -5,12 +5,12 @@ class Library::Biff < Library
   def initialize( filename )
     super( filename )
 
-    puts "\n"
-    puts "==============================="
-    puts "Analyzing #{filename}..."
+    LOG.info "\n"
+    LOG.info "==============================="
+    LOG.info "Analyzing #{filename}..."
     analyze
-    puts "Analyzing #{filename} finished."
-    puts "==============================="
+    LOG.info "Analyzing #{filename} finished."
+    LOG.info "==============================="
   end
 
   def get_file( index )
@@ -26,13 +26,13 @@ class Library::Biff < Library
   end
 
   def recreate_header
-    print "- recreating header..."
+    LOG.info "- recreating header..."
 
     header_size = 5 * 4
     source = get_bytes( 0, header_size )
     header = Library::Biff::Header.new( source, 0 )
 
-    puts " finished."
+    LOG.info " finished."
 
     header
   end
@@ -44,7 +44,7 @@ class Library::Biff < Library
     number = @header[:file_count]
     source = get_bytes( @header[:file_offset], file_entry_size * number )
 
-    print "- recreating files..."
+    LOG.info "- recreating files..."
     progressbar = Progressbar.new( number, display: false )
 
     offset = 0
@@ -56,7 +56,7 @@ class Library::Biff < Library
       progressbar.tick
     end
 
-    puts " finished."
+    LOG.info " finished."
 
     files
   end
