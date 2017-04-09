@@ -9,4 +9,4 @@ end
 
 TABLES.freeze
 
-LOG.info "Tables generated and freezed."
+LOG.debug "Tables generated and freezed."
