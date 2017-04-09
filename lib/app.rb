@@ -2,6 +2,7 @@ require 'pp'
 require 'yaml'
 require 'pathname'
 require 'chunky_png'
+require 'logger'
 
 requires = [ 
   'helpers',
@@ -38,3 +39,6 @@ requires = [
 ]
 
 requires.each { |path| require_relative path }
+
+LOG = Logger.new(STDOUT)
+LOG.level = Logger::WARN
