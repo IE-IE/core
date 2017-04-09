@@ -1,28 +1,25 @@
 class Format
-  def recreate( params = {} )
-    params[:count] ||= 1
-    params[:offset] ||= 0
+  def recreate( klass:, bytes:, progressbar: nil, count: 1, offset: 0, message: nil, params: nil, one: false )
 
     result = []
-    offset = params[:offset]
 
-    print params[:message][:start] if params[:message] && params[:message][:start]
+    print message[:start] if message && message[:start]
 
-    params[:count].times do |i|
-      object = if params[:params]
-                  params[:klass].new( params[:bytes], offset, params[:params] )
+    count.times do |i|
+      object = if params
+                  klass.new( bytes, offset, params )
                else
-                  params[:klass].new( params[:bytes], offset )
+                  klass.new( bytes, offset )
                end
       offset = object.end
       result << object
 
-      yield params[:progressbar].tick if params[:progressbar]
+      yield progressbar.tick if progressbar
     end
 
-    puts params[:message][:end] if params[:message] && params[:message][:end]
+    puts message[:end] if message && message[:end]
 
-    if params[:one]
+    if one
       result.first
     else
       result
