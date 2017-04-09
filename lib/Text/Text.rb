@@ -9,12 +9,12 @@ class Text < Format
   }
 
   def initialize( location )
-    puts "\n"
-    puts "==============================="
-    puts "Analyzing dialog file..."
+    LOG.info "\n"
+    LOG.info "==============================="
+    LOG.info "Analyzing dialog file..."
 
     if( @@cache[:location] == location )
-      puts "Using cache."
+      LOG.info "Using cache."
       use_cache
       yield 100 # as progress for loading text
     else
@@ -31,8 +31,8 @@ class Text < Format
       save_cache
     end
 
-    puts "Analyzing dialog file finished."
-    puts "==============================="
+    LOG.info "Analyzing dialog file finished."
+    LOG.info "==============================="
   end
 
   def get_entry( id )
@@ -42,7 +42,7 @@ class Text < Format
   private
 
   def recreate_entries
-    print "- recreating entries..."
+    LOG.info "- recreating entries..."
 
     entries = []
     @progressbar = Progressbar.new( @header[:entries_count], display: false )
@@ -52,7 +52,7 @@ class Text < Format
       yield @progressbar.tick
     end
 
-    puts " finished."
+    LOG.info " finished."
 
     entries
   end
