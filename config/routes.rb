@@ -10,5 +10,7 @@ Rails.application.routes.draw do
     get '/chitin/full', to: 'chitin#full'
 
     get '/text/string/:id', to: 'text#string'
+
+    get '/resources/get/:name', to: 'resources#get'
   end
 end
