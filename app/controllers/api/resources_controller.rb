@@ -9,11 +9,19 @@ class Api::ResourcesController < ApplicationController
       type = resource[:type]
       bytes = chitin.retrieve_file( resource )
 
-      redirect_to action: type.downcase, bytes: bytes if ALLOWED_TYPES.include? type
+      return false unless ALLOWED_TYPES.include? type
+
+      send( type.downcase, bytes )
     end
   end
 
-  def bam
-    bam = BAM.new( bytes: params[:bytes] )
+  private
+
+  def bam( bytes )
+    bam = BAM.new( bytes: bytes )
+    location = 'tmp/file.png'
+    bam.image( frame: 1 ).save( location )
+
+    send_file location, :type => 'image/png', :disposition => 'inline'
   end
 end

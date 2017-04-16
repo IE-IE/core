@@ -12,5 +12,7 @@ Rails.application.routes.draw do
     get '/text/string/:id', to: 'text#string'
 
     get '/resources/get/:name', to: 'resources#get'
+
+    get '/resources/bam', to: 'resources#bam'
   end
 end
