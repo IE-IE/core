@@ -1,5 +1,5 @@
 class Api::ResourcesController < ApplicationController
-  ALLOWED_TYPES = ['BAM'] 
+  ALLOWED_TYPES = ['BAM', 'ITM'] 
 
   def get
     chitin = Memory.read(:chitin)
@@ -16,6 +16,20 @@ class Api::ResourcesController < ApplicationController
   end
 
   private
+
+  def itm( bytes, resource )
+    item = Item.new( bytes: bytes )
+
+    result = {
+      name: resource[:name],
+      type: 'ITM',
+      data: {
+        header: item.header.values
+      }
+    }
+
+    render json: result
+  end
 
   def bam( bytes, resource )
     bam = BAM.new( bytes: bytes )
