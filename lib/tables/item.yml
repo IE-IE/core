@@ -100,7 +100,7 @@ item:
     - name: icon_inventory
       offset: '003a'
       size: 8
-      type: 
+      type: word
     - name: lore
       offset: '0042'
       size: 2
@@ -108,7 +108,7 @@ item:
     - name: icon_ground
       offset: '0044'
       size: 8
-      type: 
+      type: word
     - name: weight
       offset: '004c'
       size: 4
@@ -124,7 +124,7 @@ item:
     - name: icon_description
       offset: '0058'
       size: 8
-      type: 
+      type: word
     - name: enchantment
       offset: '0060'
       size: 4
