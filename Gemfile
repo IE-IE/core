@@ -46,3 +46,4 @@ gem 'chunky_png'
 
 require 'pp'
 require 'logger'
+require 'base64'
