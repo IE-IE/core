@@ -40,7 +40,7 @@ class Api::ResourcesController < ApplicationController
       type: 'BAM',
       data: {
         frames: [],
-        cycles: nil
+        cycles: []
       }
     }
 
@@ -48,6 +48,10 @@ class Api::ResourcesController < ApplicationController
       location = "#{base_location}-#{index + 1}.png"
       frame.save( location )
       result[:data][:frames] << Base64.strict_encode64( File.open( location, 'rb' ).read )
+    end
+
+    bam.cycles.each do |cycle|
+      result[:data][:cycles] << { frames: bam.frame_table[ cycle[:frame_table_index], cycle[:frame_count] ] }
     end
 
     render json: result

@@ -14,5 +14,5 @@ bam = BAM.new( bytes: bam_bytes )
 # pp bam.frames
 # pp bam.pallete
 # pp bam.frame_table
-bam.image( frame: 1, transparent: true )
+pp bam #.image( frame: 1, transparent: true )
 
