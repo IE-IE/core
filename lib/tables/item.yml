@@ -20,7 +20,7 @@ item:
     - name: replacement_item
       offset: '0010'
       size: 8
-      type: 
+      type: word
     - name: flags
       offset: '0018'
       size: 4

@@ -2,7 +2,11 @@ class String
   # Converts any String written as set of hex bytes to ASCII word.
   # @return [String] ASCII word.
   def to_char
-    [self].pack('H*')
+    begin
+      [self].pack('H*')
+    rescue
+      false
+    end
   end
 
   def to_hex( size = nil )
@@ -48,6 +52,8 @@ class Array
   def convert_to( type )
     case type
     when 'word'
+      return false if self.is_null?
+        
       self.delete_if { |byte| byte == '00' }.join.to_char
     when 'array'
       self.map do |byte|
@@ -81,6 +87,11 @@ class Array
     end
 
     bytes
+  end
+
+  def is_null?
+    # intersection of arrays
+    self.include? 'a4' || self.delete_if { |byte| byte == '00' }.empty?
   end
 
   # INFO: Use on result of to_hex!

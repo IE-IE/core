@@ -4,6 +4,6 @@ bg_location = "/home/mortimer/PlayOnLinux's virtual drives/bgee/drive_c/Program 
 chitin_path = bg_location + 'Chitin.key'
 
 chitin = Chitin.new( chitin_path ) {}
-resource = chitin.resources[5600]
-print resource[:type]
-print chitin.retrieve_file( resource )[0, 4].convert_to('word') # get only four bytes to compare type
+resource = chitin.resources.detect { |resource| resource[:name] == 'STAF01' }
+file = chitin.retrieve_file( resource )
+pp Item.new( bytes: file )
