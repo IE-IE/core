@@ -8,7 +8,7 @@ class Text < Format
     entries: nil,
   }
 
-  def initialize( location )
+  def initialize( location, lazyload: false )
     LOG.info "\n"
     LOG.info "==============================="
     LOG.info "Analyzing dialog file..."
@@ -26,7 +26,12 @@ class Text < Format
         one: true,
         bytes: @bytes
       )
-      @entries = recreate_entries { |progress| yield progress }
+      if lazyload
+      	@lazyload = true
+      	yield 100
+      else
+      	@entries = recreate_entries { |progress| yield progress }
+      end
 
       save_cache
     end
@@ -36,7 +41,11 @@ class Text < Format
   end
 
   def get_entry( id )
-  	@entries[id]
+  	if @lazyload
+  		create_entry( id )
+  	else
+  		@entries[id]
+  	end
   end
 
   private
