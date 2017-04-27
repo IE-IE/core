@@ -41,10 +41,12 @@ class Text < Format
   end
 
   def get_entry( id )
-  	if @lazyload
-  		create_entry( id )
-  	else
+  	if @entries[id]
   		@entries[id]
+  	elsif @lazyload
+  		@entries[id] = create_entry( id )
+  	else
+  		nil
   	end
   end
 
