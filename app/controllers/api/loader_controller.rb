@@ -33,6 +33,7 @@ class Api::LoaderController < ApplicationController
 
     location = Memory.read( content + '_location' )
     klass = content.capitalize.constantize
+    options = {}
 
     if location
       if params['progress']
@@ -40,7 +41,8 @@ class Api::LoaderController < ApplicationController
           response.headers['Content-Type'] = 'text/event-stream'
           sse = SSE.new( response.stream, retry: 300 )
           sent_progress = 0
-          content_value = klass.new( location ) do |progress|
+          options = { lazyload: params['lazyload']}
+          content_value = klass.new( location, options ) do |progress|
             if progress != sent_progress
               sse.write({ progress: progress })
               sent_progress = progress

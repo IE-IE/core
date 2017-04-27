@@ -12,7 +12,7 @@ class Chitin < Format
     resources: nil,
   }
 
-  def initialize( location )
+  def initialize( location, options = {} )
     LOG.info "\n"
     LOG.info "==============================="
     LOG.info "Analyzing chitin file..."
