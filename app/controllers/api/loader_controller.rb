@@ -41,7 +41,7 @@ class Api::LoaderController < ApplicationController
           response.headers['Content-Type'] = 'text/event-stream'
           sse = SSE.new( response.stream, retry: 300 )
           sent_progress = 0
-          options = { lazyload: params['lazyload']}
+          options = { lazyload: (params['lazyload'] === 'true') }
           
           content_value = klass.new( location, options ) do |progress|
             if progress != sent_progress
