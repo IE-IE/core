@@ -150,15 +150,33 @@ class File
   #
   # @param location [String] path to file.
   # @return [Array<String>] array of strings, whereas each string is bytes written in hexadecimal system.
-  def self.get_bytes( location )
+  def self.get_bytes( location, offset: nil, number: nil )
+    if offset && number
+      file = File.open( location, 'rb' )
+      file.seek( offset, :SET )
+      source = file.readpartial( number )
+      bytes = analyze_bytes( source )
+    else
+      bytes = []
+      File.open( location, 'rb' ) do |line| 
+        bytes << self.analyze_bytes( line )
+      end
+      bytes.flatten!
+    end
+
+    bytes
+  end
+
+  private
+
+  def self.analyze_bytes( source )
     bytes = []
-    self.open( location, 'rb' ) do |f| 
-      f.each_byte do |b|
-        b = b.to_i.to_s(16)
-        # make sure every block has two chars
-        b = '0' + b if b.length == 1
-        bytes << b
-      end 
+
+    source.each_byte do |b|
+      b = b.to_i.to_s(16)
+      # make sure every block has two chars
+      b = '0' + b if b.length == 1
+      bytes << b
     end
 
     bytes

@@ -42,6 +42,7 @@ class Api::LoaderController < ApplicationController
           sse = SSE.new( response.stream, retry: 300 )
           sent_progress = 0
           options = { lazyload: params['lazyload']}
+          
           content_value = klass.new( location, options ) do |progress|
             if progress != sent_progress
               sse.write({ progress: progress })
