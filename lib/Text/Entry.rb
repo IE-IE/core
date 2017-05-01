@@ -1,15 +1,22 @@
 class Text::Entry < Block
-  def initialize( source, start, string_offset, ref )
+  def initialize( source, start, ref, text )
     super( source, start, TABLES['text']['entry'] )
 
     @ref = ref
-    recreate_string( source, string_offset )
+    recreate_string( text )
   end
 
-  def recreate_string( source, string_offset )
-    offset = string_offset + @values[:string_offset]
+  def recreate_string( text )
+    starting_offset = text.header[:string_offset]
+    offset = starting_offset + @values[:string_offset]
     length = @values[:string_length]
-    string = source[ offset, length ]
+
+    if text.lazyload
+    	string = File.get_bytes( text.location, offset: offset, number: length )
+    else
+    	string = text.bytes[ offset, length ]
+    end
+
     if string
       @values[:string] = string.convert_to('word')
         .custom_encode( table: TABLES['text']['encodings']['bg1']['pl'] )
