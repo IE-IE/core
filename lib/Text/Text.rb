@@ -28,6 +28,8 @@ class Text < Format
       )
       if lazyload
       	@lazyload = true
+      	@entries = []
+      	LOG.info "Using lazyload."
       	yield 100
       else
       	@entries = recreate_entries { |progress| yield progress }
@@ -45,6 +47,7 @@ class Text < Format
   		@entries[id]
   	elsif @lazyload
   		@entries[id] = create_entry( id )
+  		@entries[id]
   	else
   		nil
   	end
