@@ -156,6 +156,7 @@ class File
       file.seek( offset, :SET )
       source = file.readpartial( number )
       bytes = analyze_bytes( source )
+      file.close
     else
       bytes = []
       File.open( location, 'rb' ) do |line| 
