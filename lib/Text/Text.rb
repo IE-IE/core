@@ -53,13 +53,13 @@ class Text < Format
   end
 
   def get_entry( id )
+  	return if id >= @header[:entries_count]
+
   	if @entries[id]
   		@entries[id]
   	elsif @lazyload
   		@entries[id] = create_entry( id )
   		@entries[id]
-  	else
-  		nil
   	end
   end
 
