@@ -16,14 +16,15 @@ class Text < Format
     LOG.info "==============================="
     LOG.info "Analyzing dialog file..."
 
-    if( @@cache[:location] == location )
+    @location = location
+    @lazyload = lazyload
+
+    if( @@cache[:location] == @location )
       LOG.info "Using cache."
       use_cache
       yield 100 # as progress for loading text
     else
-      @location = location
-
-      if lazyload
+      if @lazyload
       	# Download bytes only for header
       	@bytes = File.get_bytes( @location, offset: 0, number: 18 )
       else
@@ -36,8 +37,7 @@ class Text < Format
         bytes: @bytes
       )
 
-      if lazyload
-      	@lazyload = true
+      if @lazyload
       	@entries = []
       	LOG.info "Using lazyload."
       	yield 100
