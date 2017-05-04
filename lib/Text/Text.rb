@@ -1,6 +1,9 @@
 class Text < Format
   attr_reader :header,
-              :entries
+              :entries,
+              :lazyload,
+              :location,
+              :bytes
 
   @@cache = {
     location: nil,
@@ -13,21 +16,30 @@ class Text < Format
     LOG.info "==============================="
     LOG.info "Analyzing dialog file..."
 
-    if( @@cache[:location] == location )
+    @location = location
+    @lazyload = lazyload
+
+    if( @@cache[:location] == @location )
       LOG.info "Using cache."
       use_cache
       yield 100 # as progress for loading text
     else
-      @location = location
-      @bytes = File.get_bytes( @location )
+      if @lazyload
+      	# Download bytes only for header
+      	@bytes = File.get_bytes( @location, offset: 0, number: 18 )
+      else
+      	@bytes = File.get_bytes( @location )
+      end
 
       @header = recreate(
         klass: Text::Header,
         one: true,
         bytes: @bytes
       )
-      if lazyload
-      	@lazyload = true
+
+      if @lazyload
+      	@entries = []
+      	LOG.info "Using lazyload."
       	yield 100
       else
       	@entries = recreate_entries { |progress| yield progress }
@@ -41,12 +53,13 @@ class Text < Format
   end
 
   def get_entry( id )
+  	return if id >= @header[:entries_count]
+
   	if @entries[id]
   		@entries[id]
   	elsif @lazyload
   		@entries[id] = create_entry( id )
-  	else
-  		nil
+  		@entries[id]
   	end
   end
 
@@ -71,9 +84,15 @@ class Text < Format
   def create_entry( id )
     starting_offset = 18
     entry_size = 26
-    offset = id * entry_size + starting_offset
+    calculated_offset = id * entry_size + starting_offset
 
-    Text::Entry.new( @bytes, offset, @header[:string_offset], id )
+  	if @lazyload
+      bytes = File.get_bytes( @location, offset: calculated_offset, number: entry_size )
+    else
+      offset = calculated_offset
+    end
+
+    Text::Entry.new( (bytes || @bytes), (offset || 0), id, self )
   end
 
   def use_cache
