@@ -71,6 +71,10 @@ class Api::ResourcesController < ApplicationController
           string: entry[:string]
         }
       end
+
+      if( item.header[:replacement_item] )
+        result[:relationships][:replacement_item] = get( name: item.header[:replacement_item], no_render: true, full: true )
+      end
     end
 
     result
