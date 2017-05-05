@@ -77,7 +77,7 @@ item:
       offset: '002f'
       size: 1
       type: array
-    - name: min_consitution
+    - name: min_constitution
       offset: '0030'
       size: 1
       type: number
