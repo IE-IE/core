@@ -28,11 +28,11 @@ item:
     - name: type
       offset: '001c'
       size: 2
-      type: 
+      type: number
     - name: usability
       offset: '001e'
       size: 4
-      type: array
+      type: boolean_array
     - name: animation
       offset: '0022'
       size: 2

@@ -1,0 +1,77 @@
+# Item types are identified by their index (i.e. 0x0000 = books/misc, and 0x0002 = armor)
+---
+itemtypes:
+  - Books/misc
+  - Amulets and necklaces
+  - Armor
+  - Belts and girdles
+  - Boots
+  - Arrows
+  - Bracers and gauntlets
+  - Helms, hats, and other head-wear
+  - Keys (not in Icewind Dale?)
+  - Potions
+  - Rings
+  - Scrolls
+  - Shields (not in IWD)
+  - Food
+  - Bullets (for a sling)
+  - Bows
+  - Daggers
+  - Maces (in BG, this includes clubs)
+  - Slings
+  - Small swords
+  - Large swords
+  - Hammers
+  - Morning stars
+  - Flails
+  - Darts
+  - Axes # (specifically, 1-handed axes -- halberds and 2-handed polearms not included)
+  - Quarterstaff
+  - Crossbow
+  - Hand-to-hand weapons (fist, fist irons, punch daggers, etc)
+  - Spears
+  - Halberds (2-handed polearms)
+  - Crossbow bolts
+  - Cloaks and robes
+  - Gold pieces # (not an inventory item, but can appear as "monster dropped" treasure)
+  - Gems
+  - Wands
+  - Container/eye/broken armor
+  - Books/Broken shield/bracelet
+  - Familiars/Broken sword/earring
+  - Tattoos (PST)
+  - Lenses (PST)
+  - Buckler/teeth
+  - Candle
+  - Unknown
+  - Clubs (IWD)
+  - Unknown
+  - Unknown
+  - Large Shield (IWD)
+  - Unknown
+  - Medium Shield (IWD)
+  - Notes
+  - Unknown
+  - Unknown
+  - Small Shield (IWD)
+  - Unknown
+  - Telescope (IWD)
+  - Drink (IWD)
+  - Great Sword (IWD)
+  - Container
+  - Fur/pelt
+  - Leather Armor
+  - Studded Leather Armor
+  - Chain Mail
+  - Splint Mail
+  - Half Plate
+  - Full Plate
+  - Hide Armor
+  - Robe
+  - Unknown
+  - Bastard Sword
+  - Scarf
+  - Food (IWD2)
+  - Hat
+  - Gauntlet
