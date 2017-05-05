@@ -64,18 +64,26 @@ class Array
       end
     when 'number'
       self.reverse.join.to_i(16)
+    when 'number_array'
+      self.map do |byte|
+        byte.to_i(16)
+      end
     when 'signed'
       sign = self.pop
       number = self.reverse.join.to_i(16)
       number = number * (-1) if sign == 'ff'
       number
-    when 'number_array'
-      self.map do |byte|
-        byte.to_i(16)
-      end
     when 'boolean'
       number = self.reverse.join.to_i(16)
       number == 0 ? false : true
+    when 'boolean_array'
+      array = self.convert_to 'array'
+      array = array.map do |byte|
+        byte.map do |bit|
+          bit == '0' ? false : true
+        end
+      end
+      array
     end
   end
 

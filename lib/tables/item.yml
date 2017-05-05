@@ -24,7 +24,7 @@ item:
     - name: flags
       offset: '0018'
       size: 4
-      type: array
+      type: boolean_array
     - name: type
       offset: '001c'
       size: 2
