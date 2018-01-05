@@ -18,8 +18,11 @@ Bundler.require(*Rails.groups)
 
 require './lib/app.rb'
 
-module Api
+module Sample
   class Application < Rails::Application
+    # Initialize configuration defaults for originally generated Rails version.
+    config.load_defaults 5.1
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -29,15 +32,13 @@ module Api
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
-    # config.autoload_paths << Rails.root.join('lib')
 
     # CORS
-    config.middleware.insert_before 0, "Rack::Cors" do
+    config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
         resource '*', :headers => :any, :methods => [:get, :post, :put, :delete, :options]
       end
     end
-    config.active_record.raise_in_transactional_callbacks = true
   end
 end
