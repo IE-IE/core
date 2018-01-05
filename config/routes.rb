@@ -13,6 +13,6 @@ Rails.application.routes.draw do
 
     get '/resources/get/:name', to: 'resources#get'
 
-    get '/resources/bam', to: 'resources#bam'
+    # get '/resources/bam', to: 'resources#bam'
   end
 end

@@ -39,10 +39,7 @@ class Api::ResourcesController < ApplicationController
     }
 
     if full
-      result[:relationships] = {
-        graphics: [],
-        texts: []
-      }
+      result[:relationships] = []
 
       graphics = [
         item.header[:icon_inventory],
@@ -52,7 +49,7 @@ class Api::ResourcesController < ApplicationController
 
       graphics.each do |graphic|
         next unless graphic
-        result[:relationships][:graphics] << get( name: graphic, no_render: true )
+        result[:relationships] << get( name: graphic, no_render: true )
       end
 
       texts = [
@@ -66,9 +63,10 @@ class Api::ResourcesController < ApplicationController
         next unless text
         entry = Memory.read(:text).get_entry( text )
         next unless entry
-        result[:relationships][:texts] << {
+        result[:relationships] << {
           id: text,
-          string: entry[:string]
+          string: entry[:string],
+          type: 'TEXT'
         }
       end
 
@@ -85,7 +83,7 @@ class Api::ResourcesController < ApplicationController
     base_location = 'tmp/resources/' + resource[:name]
 
     result = {
-      name: resource[:name],
+      id: resource[:name],
       type: 'BAM',
       data: {
         frames: [],
